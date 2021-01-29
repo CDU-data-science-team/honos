@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: end -->
 
-The goal of honos is to assist the analysis and visualisation of Health of the Nation Outcome Scales [HoNOS; \@Wing1998].
+The goal of the `honos` R package is to assist with the analysis and visualisation of Health of the Nation Outcome Scales (HoNOS) [@Wing1998].
 
 ## Installation
 
@@ -44,5 +44,9 @@ library(honos)
 ```
 
 ## Resources
+
+- https://www.rcpsych.ac.uk/events/in-house-training/health-of-nation-outcome-scales
+- https://www.nhs.uk/Scorecard/Pages/IndicatorFacts.aspx?MetricId=9308
+- https://www.healthylondon.org/resource/mental-health-in-integrated-care-systems/outcome-measures/honos/
 
 ## References
