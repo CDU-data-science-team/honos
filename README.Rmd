@@ -74,6 +74,17 @@ honos_wide %>%
   dplyr::filter(id %in% paste0("id", 1:5))
 ```
 
+```{r}
+
+
+honos_wide %>% 
+  rename(client_id = id, assessment_date = date) %>% 
+  honos::lag_honos(id_var = client_id, date_var = assessment_date, change_label = "deterio_improve")
+
+
+```
+
+
 ## Tidy HoNOS data
 
 - `as_item_desc()`: Add item descriptions

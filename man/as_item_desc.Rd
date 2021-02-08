@@ -19,5 +19,5 @@ Convert HoNOS item numbers to labelled factor
 }
 \examples{
 x <- 1:13
-as_item_desc(x)
+as_item_desc(x, n_items = 13)
 }

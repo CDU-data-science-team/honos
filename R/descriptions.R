@@ -12,7 +12,7 @@
 as_severity_desc <- function(x, na_level = NULL) {
 
   x <- factor(x,
-              level = c(0:4),
+              levels = c(0:4),
               labels = c("No problem",
                          "Minor problem",
                          "Mild problem",
@@ -40,7 +40,7 @@ as_severity_desc <- function(x, na_level = NULL) {
 #'
 #' @examples
 #' x <- 1:13
-#' as_item_desc(x)
+#' as_item_desc(x, n_items = 13)
 as_item_desc <- function(x, n_items) {
 
   if (n_items == 13) {
@@ -117,16 +117,16 @@ as_i8_desc <- function(x) {
 
   x <- factor(x,
               levels = c("A", "B", "C", "D", "E", "F", "G", "H", "I", "J"),
-              labls = c("Type A: Phobic",
-                        "Type B: Anxiety",
-                        "Type C: Obsessive-compulsive",
-                        "Type D: Mental strain / tension",
-                        "Type E: Dissociative",
-                        "Type F: Somatoform",
-                        "Type G: Eating",
-                        "Type H: Sleep",
-                        "Type I: Sexual",
-                        "Type J: Other, specify"))
+              labels = c("Type A: Phobic",
+                         "Type B: Anxiety",
+                         "Type C: Obsessive-compulsive",
+                         "Type D: Mental strain / tension",
+                         "Type E: Dissociative",
+                         "Type F: Somatoform",
+                         "Type G: Eating",
+                         "Type H: Sleep",
+                         "Type I: Sexual",
+                         "Type J: Other, specify"))
 
   return(x)
 

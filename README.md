@@ -116,6 +116,29 @@ honos_wide %>%
 #> #   honos_i13 <dbl>
 ```
 
+``` r
+
+honos_wide %>% 
+  rename(client_id = id, assessment_date = date) %>% 
+  honos::lag_honos(id_var = client_id, date_var = assessment_date, change_label = "deterio_improve")
+#> # A tibble: 26,000 x 10
+#> # Groups:   client_id [1,000]
+#>    client_id assessment_date measure lag1assessment_~ item  honos lag1honos
+#>    <fct>     <date>          <chr>   <date>           <fct> <dbl>     <dbl>
+#>  1 id1       2015-10-31      honos   2009-09-23       1        NA         2
+#>  2 id1       2015-10-31      honos   2009-09-23       6         4         1
+#>  3 id1       2015-10-31      honos   2009-09-23       7         2         4
+#>  4 id1       2015-10-31      honos   2009-09-23       8         4         1
+#>  5 id1       2015-10-31      honos   2009-09-23       9         1         0
+#>  6 id1       2015-10-31      honos   2009-09-23       10        0         4
+#>  7 id1       2015-10-31      honos   2009-09-23       11        4         0
+#>  8 id1       2015-10-31      honos   2009-09-23       12        4         1
+#>  9 id1       2015-10-31      honos   2009-09-23       13        4         0
+#> 10 id1       2015-10-31      honos   2009-09-23       2         4         3
+#> # ... with 25,990 more rows, and 3 more variables: honos_change <dbl>,
+#> #   honos_date_diff <drtn>, honos_change_label <fct>
+```
+
 ## Tidy HoNOS data
 
 -   `as_item_desc()`: Add item descriptions

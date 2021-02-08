@@ -8,7 +8,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "milan.wiedemann@gmail.com",
            comment = c(ORCID = "0000-0003-1991-282X"))
-Description: The honos R package assists with the analysis and visualisation of Health of the Nation Outcome Scales (HoNOS; Wing et al. 1998) <doi:10.1192/bjp.172.1.11>
+Description: The honos R package assists with the analysis and visualisation of Health of the Nation Outcome Scales (HoNOS; Wing et al. 1998) <doi:10.1192/bjp.172.1.11>.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -18,4 +18,8 @@ Depends:
     R (>= 2.10)
 Imports: 
     magrittr,
-    forcats
+    forcats,
+    dplyr,
+    tidyr,
+    rlang,
+    stringr
