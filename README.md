@@ -30,6 +30,24 @@ This is a basic example which shows you how to solve a common problem:
 
 ``` r
 library(honos)
+library(tidyverse)
+#> Warning: package 'tidyverse' was built under R version 4.0.3
+#> -- Attaching packages --------------------------------------- tidyverse 1.3.0 --
+#> v ggplot2 3.3.3     v purrr   0.3.4
+#> v tibble  3.0.5     v dplyr   1.0.3
+#> v tidyr   1.1.2     v stringr 1.4.0
+#> v readr   1.4.0     v forcats 0.5.0
+#> Warning: package 'ggplot2' was built under R version 4.0.3
+#> Warning: package 'tibble' was built under R version 4.0.3
+#> Warning: package 'tidyr' was built under R version 4.0.3
+#> Warning: package 'readr' was built under R version 4.0.3
+#> Warning: package 'purrr' was built under R version 4.0.3
+#> Warning: package 'dplyr' was built under R version 4.0.3
+#> Warning: package 'stringr' was built under R version 4.0.3
+#> Warning: package 'forcats' was built under R version 4.0.3
+#> -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+#> x dplyr::filter() masks stats::filter()
+#> x dplyr::lag()    masks stats::lag()
 ## basic example code
 ```
 
@@ -98,8 +116,34 @@ honos_wide %>%
 #> #   honos_i13 <dbl>
 ```
 
+## Tidy HoNOS data
+
+-   `as_item_desc()`: Add item descriptions
+-   `as_severity_desc()`: Add severity descriptions
+
+``` r
+honos_long %>% 
+  mutate(item_desc = as_item_desc(item, n_items = 13)) %>% 
+  mutate(value = as_severity_desc(value, na_level = "I AM A MISSING VALUE"))
+#> # A tibble: 39,000 x 6
+#>    id    date       measure item  value           item_desc                     
+#>    <fct> <date>     <chr>   <fct> <fct>           <fct>                         
+#>  1 id1   2018-08-05 honos   1     Mild problem    Item 1: Overactive, aggressiv~
+#>  2 id1   2018-08-05 honos   2     Severe to very~ Item 2: Non-accidental self-i~
+#>  3 id1   2018-08-05 honos   3     Mild problem    Item 3: Problem drinking or d~
+#>  4 id1   2018-08-05 honos   4     Moderately sev~ Item 4: Cognitive problems    
+#>  5 id1   2018-08-05 honos   5     Mild problem    Item 5: Physical illness or d~
+#>  6 id1   2018-08-05 honos   6     I AM A MISSING~ Item 6: Hallucinations and De~
+#>  7 id1   2018-08-05 honos   7     Minor problem   Item 7: Depressed mood        
+#>  8 id1   2018-08-05 honos   8     No problem      Item 8: Other mental and beha~
+#>  9 id1   2018-08-05 honos   9     Minor problem   Item 9: Relationships         
+#> 10 id1   2018-08-05 honos   10    Moderately sev~ Item 10: Activities of daily ~
+#> # ... with 38,990 more rows
+```
+
 ## Resources
 
+-   <https://improvement.nhs.uk/documents/485/Annex_DtE_Mental_health_clustering_tool.pdf>
 -   <https://www.rcpsych.ac.uk/events/in-house-training/health-of-nation-outcome-scales>
 -   <https://www.nhs.uk/Scorecard/Pages/IndicatorFacts.aspx?MetricId=9308>
 -   <https://www.healthylondon.org/resource/mental-health-in-integrated-care-systems/outcome-measures/honos/>

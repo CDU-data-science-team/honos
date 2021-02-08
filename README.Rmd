@@ -40,6 +40,7 @@ This is a basic example which shows you how to solve a common problem:
 
 ```{r example}
 library(honos)
+library(tidyverse)
 ## basic example code
 ```
 
@@ -73,9 +74,23 @@ honos_wide %>%
   dplyr::filter(id %in% paste0("id", 1:5))
 ```
 
+## Tidy HoNOS data
+
+- `as_item_desc()`: Add item descriptions
+- `as_severity_desc()`: Add severity descriptions
+
+```{r}
+
+honos_long %>% 
+  mutate(item_desc = as_item_desc(item, n_items = 13)) %>% 
+  mutate(value = as_severity_desc(value, na_level = "I AM A MISSING VALUE"))
+
+```
+
 
 ## Resources
 
+- https://improvement.nhs.uk/documents/485/Annex_DtE_Mental_health_clustering_tool.pdf
 - https://www.rcpsych.ac.uk/events/in-house-training/health-of-nation-outcome-scales
 - https://www.nhs.uk/Scorecard/Pages/IndicatorFacts.aspx?MetricId=9308
 - https://www.healthylondon.org/resource/mental-health-in-integrated-care-systems/outcome-measures/honos/
