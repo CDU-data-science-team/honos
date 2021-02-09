@@ -12,7 +12,7 @@ as_severity_desc(x, na_level = NULL)
 \item{na_level}{String, specifying label for missing values.}
 }
 \value{
-
+Labelled "factor"
 }
 \description{
 Convert HoNOS severity scores to labelled factor

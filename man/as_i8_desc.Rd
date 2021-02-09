@@ -10,7 +10,7 @@ as_i8_desc(x)
 \item{x}{Vector of strings}
 }
 \value{
-
+Labelled "factor"
 }
 \description{
 Convert HoNOS item 8 types to labelled factor

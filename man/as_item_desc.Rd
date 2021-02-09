@@ -12,10 +12,10 @@ as_item_desc(x, n_items)
 \item{n_items}{Numeric, specifying maximum number of items}
 }
 \value{
-
+Labelled "factor"
 }
 \description{
-Convert HoNOS item numbers to labelled factor
+Types of other mental and behavioural problems specified in Item 8 can be labelled using the function \code{\link{as_i8_desc}}
 }
 \examples{
 x <- 1:13

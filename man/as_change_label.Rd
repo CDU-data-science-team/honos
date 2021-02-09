@@ -18,7 +18,7 @@ as_change_label(
 \item{change_label}{String, specifying whether to describe the change using "high_low" (e.g., HL stands for high to low) or "deterio_improve" (Deterioration, Unchanged, Improved)}
 }
 \value{
-
+Labelled "factor"
 }
 \description{
 Calculate change labels for lagged change scores

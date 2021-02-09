@@ -24,7 +24,7 @@ lag_honos(
 \item{change_label}{String, specifying whether to describe the change using "high_low" (e.g., HL stands for high to low) or "deterio_improve" (Deterioration, Unchanged, Improved)}
 }
 \value{
-
+Dataframe with original data and lagged values
 }
 \description{
 Calculate lagged HoNOS scores
