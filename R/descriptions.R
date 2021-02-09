@@ -31,7 +31,7 @@ as_severity_desc <- function(x, na_level = NULL) {
 }
 
 #' Convert HoNOS item numbers to labelled factor
-#'
+#' @description Types of other mental and behavioural problems specified in Item 8 can be labelled using the function \code{\link{as_i8_desc}}
 #' @param x Vector of item numbers
 #' @param n_items Numeric, specifying maximum number of items
 #'
@@ -95,10 +95,11 @@ as_item_desc <- function(x, n_items) {
 
     stop("This version if the HoNOS is currently not supported.")
 
+    }
+
+  return(x)
+
   }
-
-
-              }
 
 
 
@@ -107,7 +108,7 @@ as_item_desc <- function(x, n_items) {
 #'
 #' @param x Vector of strings
 #'
-#' @return
+#' @return Labelled "factor"
 #' @export
 #'
 #' @examples
