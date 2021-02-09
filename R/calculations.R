@@ -1,12 +1,12 @@
 #' Calculate lagged HoNOS scores
 #'
-#' @param data
-#' @param id_var
-#' @param date_var
-#' @param add_change_label
-#' @param change_label
+#' @param data Dataframe in wide format (i.e., one row for each HoNOS assessment and one column for each HoNOS item)
+#' @param id_var Name of variable that uniquely identifies each individual
+#' @param date_var Name of date (or datetime) variable
+#' @param add_change_label Logical, specifying whether to add a variable that describes the change using the function \code{\link{as_change_label}}
+#' @param change_label String, specifying whether to describe the change using "high_low" (e.g., HL stands for high to low) or "deterio_improve" (Deterioration, Unchanged, Improved)
 #'
-#' @return
+#' @return Dataframe with original data and lagged values
 #' @export
 #'
 #' @examples
@@ -71,13 +71,13 @@ lag_honos <- function(data, id_var, date_var, add_change_label = TRUE, change_la
 
 
 
-#' Calculate change labels of lagged change scores
+#' Calculate change labels for lagged change scores
 #'
-#' @param value
-#' @param change_label
-#' @param lag_value
+#' @param value Name of variable with HoNOS score at time point (t)
+#' @param lag_value Name of variable with HoNOS score at previous time point (t-1)
+#' @param change_label String, specifying whether to describe the change using "high_low" (e.g., HL stands for high to low) or "deterio_improve" (Deterioration, Unchanged, Improved)
 #'
-#' @return
+#' @return Labelled "factor"
 #' @export
 #'
 #' @examples
@@ -113,10 +113,4 @@ as_change_label <- function(value, lag_value, change_label = c("high_low", "dete
 
   }
 
-
-
-
-
 }
-
-

@@ -1,0 +1,40 @@
+---
+title: "Describe HoNOS items and severity scores"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{describe_honos}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Describe HoNOS item labels
+
+- `as_item_desc()`: Add item descriptions (For 13 and 18 item versions of the HoNOS)
+ 
+```{r}
+library(honos)
+
+honos_long %>% 
+  dplyr::mutate(item_desc = as_item_desc(item, n_items = 13))
+
+```
+
+
+## Describe HoNOS severity scores
+
+- `as_severity_desc()`: Add severity descriptions (Values '0' to '4')
+
+```{r}
+library(honos)
+
+honos_long %>% 
+  dplyr::mutate(value_desc = as_severity_desc(value, na_level = "I AM A MISSING VALUE"))
+
+```

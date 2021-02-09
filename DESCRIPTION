@@ -2,12 +2,13 @@ Package: honos
 Title: Analyse and Visualise the Nation Outcome Scales (HoNOS)
 Version: 0.1.0
 Date: 2021-02-08
-Authors@R: 
-    person(given = "Milan",
-           family = "Wiedemann",
-           role = c("aut", "cre"),
-           email = "milan.wiedemann@gmail.com",
-           comment = c(ORCID = "0000-0003-1991-282X"))
+Authors@R: c(
+  person("Milan", "Wiedemann", email = "milan.wiedemann@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0003-1991-282X")),
+  person("Lori", "Edwards Suarez", role = c("aut"), comment = c(ORCID = "0000-0002-3448-4344")),
+  person("Zoe", "Turner", role = c("aut"), comment = c(ORCID = "0000-0003-1033-9158")),
+  person("Ben", "di Mambro", role = c("aut"), comment = c(ORCID = "0000-0002-4886-3919")),
+  person("Chris", "Beeley", role = c("aut"), comment = c(ORCID = "0000-0003-2344-9962"))
+  )
 Description: The honos R package assists with the analysis and visualisation of Health of the Nation Outcome Scales (HoNOS; Wing et al. 1998) <doi:10.1192/bjp.172.1.11>.
 License: MIT + file LICENSE
 Encoding: UTF-8
@@ -23,3 +24,7 @@ Imports:
     tidyr,
     rlang,
     stringr
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

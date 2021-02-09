@@ -13,7 +13,15 @@ lag_honos(
 )
 }
 \arguments{
-\item{change_label}{}
+\item{data}{Dataframe in wide format (i.e., one row for each HoNOS assessment and one column for each HoNOS item)}
+
+\item{id_var}{Name of variable that uniquely identifies each individual}
+
+\item{date_var}{Name of date (or datetime) variable}
+
+\item{add_change_label}{Logical, specifying whether to add a variable that describes the change using the function \code{\link{as_change_label}}}
+
+\item{change_label}{String, specifying whether to describe the change using "high_low" (e.g., HL stands for high to low) or "deterio_improve" (Deterioration, Unchanged, Improved)}
 }
 \value{
 

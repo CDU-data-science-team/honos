@@ -2,7 +2,7 @@
 % Please edit documentation in R/calculations.R
 \name{as_change_label}
 \alias{as_change_label}
-\title{Calculate change labels of lagged change scores}
+\title{Calculate change labels for lagged change scores}
 \usage{
 as_change_label(
   value,
@@ -11,13 +11,17 @@ as_change_label(
 )
 }
 \arguments{
-\item{lag_value}{}
+\item{value}{Name of variable with HoNOS score at time point (t)}
+
+\item{lag_value}{Name of variable with HoNOS score at previous time point (t-1)}
+
+\item{change_label}{String, specifying whether to describe the change using "high_low" (e.g., HL stands for high to low) or "deterio_improve" (Deterioration, Unchanged, Improved)}
 }
 \value{
 
 }
 \description{
-Calculate change labels of lagged change scores
+Calculate change labels for lagged change scores
 }
 \examples{
 as_change_label(value = 0, lag_value = 4,

@@ -3,7 +3,7 @@
 #' @param x Vector of severity rating from 0 to 4
 #' @param na_level String, specifying label for missing values.
 #'
-#' @return
+#' @return Labelled "factor"
 #' @export
 #'
 #' @examples
@@ -35,7 +35,7 @@ as_severity_desc <- function(x, na_level = NULL) {
 #' @param x Vector of item numbers
 #' @param n_items Numeric, specifying maximum number of items
 #'
-#' @return
+#' @return Labelled "factor"
 #' @export
 #'
 #' @examples

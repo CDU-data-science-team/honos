@@ -1,0 +1,32 @@
+---
+title: "Calculate lagged HoNOS scores"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{lagged_honos_scores}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Calculate lagged scores
+
+- `lag_honos()`: Calculate lagged scores based on a date variable and calculate change labels (e.g., "high to low", or 'deterioration')
+- `as_change_label()`: Creates change labels for repeated measures of the HoNOS. This is an optional argument in the `lag_honos()` function or can be used separately
+
+```{r}
+
+library(honos)
+
+honos_wide %>% 
+  dplyr::rename(client_id = id, assessment_date = date) %>% 
+  honos::lag_honos(id_var = client_id, 
+                   date_var = assessment_date, 
+                   change_label = "deterio_improve")
+
+```
