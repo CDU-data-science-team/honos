@@ -37,6 +37,10 @@ See vignettes for further information.
 
 -   `as_severity_desc()`: Add severity descriptions (Values ‘0’ to ‘4’)
 
+#### Add labels for HoNOS clusters
+
+-   `as_cluster_desc()`: Describe clusters (Values: 0 to 21)
+
 #### Calculate lagged HoNOS scores
 
 -   `lag_honos()`: Calculate lagged scores based on a date variable and

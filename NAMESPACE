@@ -2,6 +2,7 @@
 
 export("%>%")
 export(as_change_label)
+export(as_cluster_desc)
 export(as_i8_desc)
 export(as_item_desc)
 export(as_severity_desc)

@@ -38,3 +38,15 @@ honos_long %>%
   dplyr::mutate(value_desc = as_severity_desc(value, na_level = "I AM A MISSING VALUE"))
 
 ```
+## Describe clusters
+
+- `as_cluster_desc()`: Describe clusters (Values: 0 to 21)
+
+```{r}
+
+library(honos)
+x <- 0:21
+as_cluster_desc(x)
+
+```
+
