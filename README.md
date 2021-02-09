@@ -24,39 +24,19 @@ You can install the development version from
 devtools::install_github("CDU-data-science-team/honos")
 ```
 
-## Example
-
-This is a basic example which shows you how to solve a common problem:
+## Examples
 
 ``` r
 library(honos)
-library(tidyverse)
-#> Warning: package 'tidyverse' was built under R version 4.0.3
-#> -- Attaching packages --------------------------------------- tidyverse 1.3.0 --
-#> v ggplot2 3.3.3     v purrr   0.3.4
-#> v tibble  3.0.5     v dplyr   1.0.3
-#> v tidyr   1.1.2     v stringr 1.4.0
-#> v readr   1.4.0     v forcats 0.5.0
-#> Warning: package 'ggplot2' was built under R version 4.0.3
-#> Warning: package 'tibble' was built under R version 4.0.3
-#> Warning: package 'tidyr' was built under R version 4.0.3
-#> Warning: package 'readr' was built under R version 4.0.3
-#> Warning: package 'purrr' was built under R version 4.0.3
-#> Warning: package 'dplyr' was built under R version 4.0.3
-#> Warning: package 'stringr' was built under R version 4.0.3
-#> Warning: package 'forcats' was built under R version 4.0.3
-#> -- Conflicts ------------------------------------------ tidyverse_conflicts() --
-#> x dplyr::filter() masks stats::filter()
-#> x dplyr::lag()    masks stats::lag()
-## basic example code
+# library(tidyverse)
 ```
 
-## Datasets
+### Datasets
 
 The package comes with a simulated datasets of HoNOS scores (13-items)
 that is available in “long” as well as “wide” format.
 
-### Long format
+#### Long format
 
 -   `id`: Unique identifier
 -   `date`: Date variable
@@ -65,6 +45,7 @@ that is available in “long” as well as “wide” format.
 -   `value`: HoNOS score
 
 ``` r
+# Show fist 5 ids
 honos_long %>% 
   dplyr::filter(id %in% paste0("id", 1:5))
 #> # A tibble: 195 x 5
@@ -80,10 +61,10 @@ honos_long %>%
 #>  8 id1   2018-08-05 honos   8         0
 #>  9 id1   2018-08-05 honos   9         1
 #> 10 id1   2018-08-05 honos   10        3
-#> # ... with 185 more rows
+#> # … with 185 more rows
 ```
 
-### Wide format
+#### Wide format
 
 -   `id`: Unique identifier
 -   `date`: Date variable
@@ -91,6 +72,7 @@ honos_long %>%
 -   `honos_i1` to `honos_i13`: HoNOS score for each item
 
 ``` r
+# Show fist 5 ids
 honos_wide %>% 
   dplyr::filter(id %in% paste0("id", 1:5))
 #> # A tibble: 15 x 16
@@ -111,19 +93,55 @@ honos_wide %>%
 #> 13 id5   2016-08-02 honos          3        3        3        1        3
 #> 14 id5   2012-12-05 honos          2        1        1        1        3
 #> 15 id5   2000-09-20 honos          2        3        3        0        4
-#> # ... with 8 more variables: honos_i6 <dbl>, honos_i7 <dbl>, honos_i8 <dbl>,
+#> # … with 8 more variables: honos_i6 <dbl>, honos_i7 <dbl>, honos_i8 <dbl>,
 #> #   honos_i9 <dbl>, honos_i10 <dbl>, honos_i11 <dbl>, honos_i12 <dbl>,
 #> #   honos_i13 <dbl>
 ```
 
-``` r
+#### Tidy HoNOS data
 
+-   `as_item_desc()`: Add item descriptions (Fot 13 and 18 item versions
+    of the HoNOS)
+-   `as_severity_desc()`: Add severity descriptions (Values ‘0’ to ‘4’)
+-   `as_i8_desc()`: Add description for item 8 types (Type ‘A’ to ‘J’)
+
+``` r
+honos_long %>% 
+  dplyr::mutate(item_desc = as_item_desc(item, n_items = 13)) %>% 
+  dplyr::mutate(value = as_severity_desc(value, na_level = "I AM A MISSING VALUE"))
+#> # A tibble: 39,000 x 6
+#>    id    date       measure item  value           item_desc                     
+#>    <fct> <date>     <chr>   <fct> <fct>           <fct>                         
+#>  1 id1   2018-08-05 honos   1     Mild problem    Item 1: Overactive, aggressiv…
+#>  2 id1   2018-08-05 honos   2     Severe to very… Item 2: Non-accidental self-i…
+#>  3 id1   2018-08-05 honos   3     Mild problem    Item 3: Problem drinking or d…
+#>  4 id1   2018-08-05 honos   4     Moderately sev… Item 4: Cognitive problems    
+#>  5 id1   2018-08-05 honos   5     Mild problem    Item 5: Physical illness or d…
+#>  6 id1   2018-08-05 honos   6     I AM A MISSING… Item 6: Hallucinations and De…
+#>  7 id1   2018-08-05 honos   7     Minor problem   Item 7: Depressed mood        
+#>  8 id1   2018-08-05 honos   8     No problem      Item 8: Other mental and beha…
+#>  9 id1   2018-08-05 honos   9     Minor problem   Item 9: Relationships         
+#> 10 id1   2018-08-05 honos   10    Moderately sev… Item 10: Activities of daily …
+#> # … with 38,990 more rows
+```
+
+#### Calculate lagged scores
+
+-   `lag_honos()`: Calculate lagged scores based on a date variable and
+    calculate change labels (e.g., “high to low,” or ‘deterioration’)
+-   `as_change_label()`: Creates change labels for repeated measures of
+    the HoNOS. This is an optional argument in the `lag_honos()`
+    function or can be used separately
+
+``` r
 honos_wide %>% 
-  rename(client_id = id, assessment_date = date) %>% 
-  honos::lag_honos(id_var = client_id, date_var = assessment_date, change_label = "deterio_improve")
+  dplyr::rename(client_id = id, assessment_date = date) %>% 
+  honos::lag_honos(id_var = client_id, 
+                   date_var = assessment_date, 
+                   change_label = "deterio_improve")
 #> # A tibble: 26,000 x 10
 #> # Groups:   client_id [1,000]
-#>    client_id assessment_date measure lag1assessment_~ item  honos lag1honos
+#>    client_id assessment_date measure lag1assessment_… item  honos lag1honos
 #>    <fct>     <date>          <chr>   <date>           <fct> <dbl>     <dbl>
 #>  1 id1       2015-10-31      honos   2009-09-23       1        NA         2
 #>  2 id1       2015-10-31      honos   2009-09-23       6         4         1
@@ -135,33 +153,8 @@ honos_wide %>%
 #>  8 id1       2015-10-31      honos   2009-09-23       12        4         1
 #>  9 id1       2015-10-31      honos   2009-09-23       13        4         0
 #> 10 id1       2015-10-31      honos   2009-09-23       2         4         3
-#> # ... with 25,990 more rows, and 3 more variables: honos_change <dbl>,
+#> # … with 25,990 more rows, and 3 more variables: honos_change <dbl>,
 #> #   honos_date_diff <drtn>, honos_change_label <fct>
-```
-
-## Tidy HoNOS data
-
--   `as_item_desc()`: Add item descriptions
--   `as_severity_desc()`: Add severity descriptions
-
-``` r
-honos_long %>% 
-  mutate(item_desc = as_item_desc(item, n_items = 13)) %>% 
-  mutate(value = as_severity_desc(value, na_level = "I AM A MISSING VALUE"))
-#> # A tibble: 39,000 x 6
-#>    id    date       measure item  value           item_desc                     
-#>    <fct> <date>     <chr>   <fct> <fct>           <fct>                         
-#>  1 id1   2018-08-05 honos   1     Mild problem    Item 1: Overactive, aggressiv~
-#>  2 id1   2018-08-05 honos   2     Severe to very~ Item 2: Non-accidental self-i~
-#>  3 id1   2018-08-05 honos   3     Mild problem    Item 3: Problem drinking or d~
-#>  4 id1   2018-08-05 honos   4     Moderately sev~ Item 4: Cognitive problems    
-#>  5 id1   2018-08-05 honos   5     Mild problem    Item 5: Physical illness or d~
-#>  6 id1   2018-08-05 honos   6     I AM A MISSING~ Item 6: Hallucinations and De~
-#>  7 id1   2018-08-05 honos   7     Minor problem   Item 7: Depressed mood        
-#>  8 id1   2018-08-05 honos   8     No problem      Item 8: Other mental and beha~
-#>  9 id1   2018-08-05 honos   9     Minor problem   Item 9: Relationships         
-#> 10 id1   2018-08-05 honos   10    Moderately sev~ Item 10: Activities of daily ~
-#> # ... with 38,990 more rows
 ```
 
 ## Resources

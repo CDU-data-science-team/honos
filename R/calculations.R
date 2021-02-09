@@ -16,25 +16,28 @@
 #'           change_label = "deterio_improve")
 lag_honos <- function(data, id_var, date_var, add_change_label = TRUE, change_label = c("high_low", "deterio_improve")) {
 
+  # Check arguments
   change_label <- match.arg(change_label)
 
   # TODO ADD SOME DATA CHECKS
 
-  # TODO THIS NEEDS TO BE IMPROVES
-  # Create vectors
+  # TODO THIS NEEDS TO BE IMPROVED
+  # MAKE THIS MORE GENERIC SO IT WORKS WITH ALL SORTS OF VARIABLE NAMES
+  # Create vectors of variable names
   honos_scales_new_names <- paste0("honos_i", 1:13)
   honos_scales_lag_names <- paste0("lag1", "honos", "_", "i", 1:13)
 
-  # Create lag
+  # Create lag1 in wide format
   data_lag <- data %>%
     dplyr::group_by({{ id_var }}) %>%
     dplyr::arrange({{ id_var }}, {{ date_var }}) %>%
     dplyr::mutate(dplyr::across(.cols = c({{ date_var }}, {{ honos_scales_new_names }}),
                                 .fns = list(lag1 = ~dplyr::lag(.)),
-                                .names = "{fn}{col}"))
+                                .names = "{fn}{col}")) %>%
+    dplyr::ungroup()
 
 
-  # Calculate difference score
+  # Calculate difference score in long format
   data_change <- data_lag %>%
     tidyr::pivot_longer(cols = dplyr::all_of(c({{ honos_scales_new_names }}, {{ honos_scales_lag_names }})),
                         values_to = "value",
@@ -49,7 +52,7 @@ lag_honos <- function(data, id_var, date_var, add_change_label = TRUE, change_la
                   honos_date_diff := {{ date_var }} - !! rlang::sym(paste0("lag1", rlang::ensym(date_var)))) %>%
     tidyr::drop_na(honos_date_diff)
 
-
+  # Add change label
   if (add_change_label == TRUE) {
 
     data_change <- data_change %>%
@@ -59,6 +62,7 @@ lag_honos <- function(data, id_var, date_var, add_change_label = TRUE, change_la
 
   }
 
+  # Return data
   return(data_change)
 
 }
