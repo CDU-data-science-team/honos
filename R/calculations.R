@@ -114,3 +114,76 @@ as_change_label <- function(value, lag_value, change_label = c("high_low", "dete
   }
 
 }
+
+
+#' Calculate sum scores of HoNOS subscales (12-item version)
+#'
+#' @param data Data in long format
+#' @param id_var Name of variable that uniquely identifies each individual
+#' @param date_var Name of date (or datetime) variable
+#' @param item_var Name of variable specifying item numbers
+#' @param value_var Name of variable with HoNOS scores
+#' @param return_format String, specifying whether to return data in long (i.e., TODO) or wide (i.e., TODO) format
+#' @param return_items Logical, specifying whether to include individual item scores. NOTE: CURRENTLY NOT SUPPORTED.
+#'
+#' @return
+#' @export
+#'
+#' @examples
+calc_honos_subscales <- function(data, id_var, date_var, item_var, value_var, return_format = c("long", "wide"), return_items = FALSE) {
+
+  return_format <- match.arg(return_format)
+
+  message("Note: This is using the subscales as identified in ... TODO ADD REFERNCE (YEAR).")
+
+  data_temp <- data %>%
+    dplyr::mutate(honos_subscale = dplyr::case_when({{ item_var }} %in% c(1:3) ~ "behaviour",
+                                                    {{ item_var }} %in% c(4:5) ~ "impairment",
+                                                    {{ item_var }} %in% c(6:8) ~ "symptom",
+                                                    {{ item_var }} %in% c(9:12) ~ "social")) %>%
+    dplyr::group_by(id, date, honos_subscale) %>%
+    dplyr::mutate(honos_subscale_value = sum({{ value_var }})) %>%
+    dplyr::ungroup()
+
+  if (return_format == "long") {
+
+    if (return_items == TRUE) {
+
+      return(data_temp)
+
+    } else if (return_items == FALSE) {
+
+      data_temp <- data_temp %>%
+        dplyr::select(-{{ item_var }}, -{{ value_var }}) %>%
+        dplyr::distinct()
+
+      return(data_temp)
+
+    }
+
+
+
+  } else if (return_format == "wide") {
+
+    if (return_items == TRUE) {
+
+      stop("This option is currently not supported.", call. = FALSE)
+
+    } else if (return_items == FALSE) {
+
+      data_temp <- data_temp %>%
+        dplyr::select(-{{ item_var }}, -{{ value_var }}) %>%
+        tidyr::drop_na(honos_subscale) %>%
+        dplyr::distinct() %>%
+        tidyr::pivot_wider(id_cols = c("id", "date", "measure"),
+                           names_prefix = "honos_",
+                           names_from = honos_subscale,
+                           values_from = honos_subscale_value)
+
+      return(data_temp)
+
+    }
+
+  }
+
+}

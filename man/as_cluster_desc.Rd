@@ -22,6 +22,6 @@ Describe clusters
 \examples{
 x <- 0:21
 as_cluster_desc(x)
-as_cluster_desc(x, return = "super_cluster)
-as_cluster_desc(x, return = "super_cluster, super_cluster_details = TRUE)
+as_cluster_desc(x, return = "super_cluster")
+as_cluster_desc(x, return = "super_cluster", super_cluster_details = TRUE)
 }

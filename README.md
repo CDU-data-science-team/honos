@@ -21,12 +21,17 @@ You can install the development version from
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("CDU-data-science-team/honos")
+devtools::install_github("CDU-data-science-team/honos", build_vignettes = TRUE)
 ```
 
 ## Functions
 
 See vignettes for further information.
+
+``` r
+browseVignettes(package = "honos")
+#> No vignettes found by browseVignettes(package = "honos")
+```
 
 #### Add labels for HoNOS items
 

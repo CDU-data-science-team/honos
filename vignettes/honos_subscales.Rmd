@@ -1,0 +1,55 @@
+---
+title: "Analysing subscales of the HoNOS"
+output: rmarkdown::html_vignette
+bibliography: "references.bib"
+vignette: >
+  %\VignetteIndexEntry{honos_subscales}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(honos)
+```
+
+## Introduction
+
+Review the psychometric literature on this topic, e.g., @Trauer1999
+
+## How to calculate subscales
+
+### Return long format
+
+```{r}
+
+honos_long %>% 
+  honos::calc_honos_subscales(id_var = id, 
+                              date_var = date, 
+                              item_var = item, 
+                              value_var = value, 
+                              return_format = "long", 
+                              return_items = TRUE)
+```
+
+### Return wide format
+
+```{r}
+
+honos_long %>% 
+  honos::calc_honos_subscales(id_var = id, 
+                              date_var = date, 
+                              item_var = item, 
+                              value_var = value, 
+                              return_format = "wide", 
+                              return_items = FALSE)
+  
+```
+
+## References
