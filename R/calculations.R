@@ -130,7 +130,7 @@ calc_change_label <- function(value, lag_value, change_label = c("high_low", "de
 #' @export
 #'
 #' @examples
-calc_honos_subscales <- function(data, id_var, date_var, item_var, value_var, return_format = c("long", "wide"), return_items = FALSE) {
+calc_subscales <- function(data, id_var, date_var, item_var, value_var, return_format = c("long", "wide"), return_items = FALSE) {
 
   return_format <- match.arg(return_format)
 

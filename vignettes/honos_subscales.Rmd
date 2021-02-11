@@ -30,12 +30,12 @@ Review the psychometric literature on this topic, e.g., @Trauer1999
 ```{r}
 
 honos_long %>% 
-  honos::calc_honos_subscales(id_var = id, 
-                              date_var = date, 
-                              item_var = item, 
-                              value_var = value, 
-                              return_format = "long", 
-                              return_items = TRUE)
+  honos::calc_subscales(id_var = id, 
+                        date_var = date, 
+                        item_var = item, 
+                        value_var = value, 
+                        return_format = "long", 
+                        return_items = TRUE)
 ```
 
 ### Return wide format
@@ -43,13 +43,13 @@ honos_long %>%
 ```{r}
 
 honos_long %>% 
-  honos::calc_honos_subscales(id_var = id, 
-                              date_var = date, 
-                              item_var = item, 
-                              value_var = value, 
-                              return_format = "wide", 
-                              return_items = FALSE)
-  
+  honos::calc_subscales(id_var = id, 
+                        date_var = date, 
+                        item_var = item, 
+                        value_var = value, 
+                        return_format = "wide", 
+                        return_items = FALSE)
+
 ```
 
 ## References

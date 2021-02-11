@@ -42,7 +42,7 @@ information. The vignettes are also available at
     calculate change labels (e.g., “high to low,” or ‘deterioration’)
 -   `calc_change_label()`: Calculates change labels for repeated
     measures of the HoNOS
--   `calc_honos_subscales()`: Calculates sums of HoNOS subscales
+-   `calc_subscales()`: Calculates sums of HoNOS subscales
 
 ## Resources
 

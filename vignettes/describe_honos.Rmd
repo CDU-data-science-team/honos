@@ -1,5 +1,5 @@
 ---
-title: "Describe HoNOS items and severity scores"
+title: "Describe HoNOS items, severity scores, and clusters"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{describe_honos}
@@ -24,6 +24,12 @@ library(honos)
 honos_long %>% 
   dplyr::mutate(item_desc = as_item_desc(item, n_items = 13))
 
+```
+In item 8, the clinician can specify 10 different categories.
+The function `as_i8_desc()` can be used to add more detailed labels, for example:
+
+```{r}
+as_i8_desc("B")
 ```
 
 

@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">honos</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
@@ -54,7 +54,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/describe_honos.html">Describe HoNOS items and severity scores</a>
+      <a href="../articles/describe_honos.html">Describe HoNOS items, severity scores, and clusters</a>
     </li>
     <li>
       <a href="../articles/example_honos_datasets.html">Example HoNOS datasets</a>
@@ -93,7 +93,7 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">honos</span><span class="op">)</span>
-<span class="co">#&gt; This is honos 0.1.0</span>
+<span class="co">#&gt; This is honos 0.1.1</span>
 <span class="co">#&gt; honos is currently in development -function names and arguments might change.</span>
 <span class="co">#&gt; PLEASE REPORT ANY BUGS!</span></code></pre></div>
 <div id="introduction" class="section level2">
@@ -110,12 +110,12 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="va">honos_long</span> <span class="op">%&gt;%</span> 
-  <span class="fu">honos</span><span class="fu">::</span><span class="fu"><a href="../reference/calc_honos_subscales.html">calc_honos_subscales</a></span><span class="op">(</span>id_var <span class="op">=</span> <span class="va">id</span>, 
-                              date_var <span class="op">=</span> <span class="va">date</span>, 
-                              item_var <span class="op">=</span> <span class="va">item</span>, 
-                              value_var <span class="op">=</span> <span class="va">value</span>, 
-                              return_format <span class="op">=</span> <span class="st">"long"</span>, 
-                              return_items <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+  <span class="fu">honos</span><span class="fu">::</span><span class="fu"><a href="../reference/calc_subscales.html">calc_subscales</a></span><span class="op">(</span>id_var <span class="op">=</span> <span class="va">id</span>, 
+                        date_var <span class="op">=</span> <span class="va">date</span>, 
+                        item_var <span class="op">=</span> <span class="va">item</span>, 
+                        value_var <span class="op">=</span> <span class="va">value</span>, 
+                        return_format <span class="op">=</span> <span class="st">"long"</span>, 
+                        return_items <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; Note: This is using the subscales as identified in ... TODO ADD REFERNCE (YEAR).</span>
 <span class="co">#&gt; # A tibble: 39,000 x 7</span>
 <span class="co">#&gt;    id    date       measure item  value honos_subscale honos_subscale_value</span>
@@ -138,12 +138,12 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="va">honos_long</span> <span class="op">%&gt;%</span> 
-  <span class="fu">honos</span><span class="fu">::</span><span class="fu"><a href="../reference/calc_honos_subscales.html">calc_honos_subscales</a></span><span class="op">(</span>id_var <span class="op">=</span> <span class="va">id</span>, 
-                              date_var <span class="op">=</span> <span class="va">date</span>, 
-                              item_var <span class="op">=</span> <span class="va">item</span>, 
-                              value_var <span class="op">=</span> <span class="va">value</span>, 
-                              return_format <span class="op">=</span> <span class="st">"wide"</span>, 
-                              return_items <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+  <span class="fu">honos</span><span class="fu">::</span><span class="fu"><a href="../reference/calc_subscales.html">calc_subscales</a></span><span class="op">(</span>id_var <span class="op">=</span> <span class="va">id</span>, 
+                        date_var <span class="op">=</span> <span class="va">date</span>, 
+                        item_var <span class="op">=</span> <span class="va">item</span>, 
+                        value_var <span class="op">=</span> <span class="va">value</span>, 
+                        return_format <span class="op">=</span> <span class="st">"wide"</span>, 
+                        return_items <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="co">#&gt; Note: This is using the subscales as identified in ... TODO ADD REFERNCE (YEAR).</span>
 <span class="co">#&gt; # A tibble: 3,000 x 7</span>
 <span class="co">#&gt;    id    date       measure honos_behaviour honos_impairment honos_symptom</span>
