@@ -30,26 +30,21 @@ See vignettes using `browseVignettes(package = "honos")` for further
 information. The vignettes are also available at
 <https://cdu-data-science-team.github.io/honos> (see “Articles”).
 
-#### Add labels for HoNOS items
+### Add descriptions to HoNOS data
 
--   `as_item_desc()`: Add item descriptions (For 13 and 18 item versions
-    of the HoNOS)
+-   `as_item_desc()`: Add labels for HoNOS items
+-   `as_severity_desc()`: Add labels for HoNOS severity ratings
+-   `as_cluster_desc()`: Add labels for HoNOS clusters
 
-#### Add labels for HoNOS severity ratings
-
--   `as_severity_desc()`: Add severity descriptions (Values ‘0’ to ‘4’)
-
-#### Add labels for HoNOS clusters
-
--   `as_cluster_desc()`: Describe clusters (Values: 0 to 21)
-
-#### Calculate lagged HoNOS scores
+### Calculations
 
 -   `lag_honos()`: Calculate lagged scores based on a date variable and
     calculate change labels (e.g., “high to low,” or ‘deterioration’)
--   `as_change_label()`: Creates change labels for repeated measures of
-    the HoNOS. This is an optional argument in the `lag_honos()`
-    function or can be used separately
+-   `calc_change_label()`: Calculates change labels for repeated
+    measures of the HoNOS
+-   `calc_honos_subscales()`: Calculates sums of HoNOS subscales
+
+#### Calculate sum of subscales
 
 ## Resources
 

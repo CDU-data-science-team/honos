@@ -60,6 +60,9 @@
       <a href="../articles/example_honos_datasets.html">Example HoNOS datasets</a>
     </li>
     <li>
+      <a href="../articles/honos_subscales.html">Analysing subscales of the HoNOS</a>
+    </li>
+    <li>
       <a href="../articles/lagged_honos_scores.html">Calculate lagged HoNOS scores</a>
     </li>
   </ul>
@@ -95,11 +98,14 @@
 <li>
 <code><a href="../reference/lag_honos.html">lag_honos()</a></code>: Calculate lagged scores based on a date variable and calculate change labels (e.g., “high to low”, or ‘deterioration’)</li>
 <li>
-<code><a href="../reference/as_change_label.html">as_change_label()</a></code>: Creates change labels for repeated measures of the HoNOS. This is an optional argument in the <code><a href="../reference/lag_honos.html">lag_honos()</a></code> function or can be used separately</li>
+<code><a href="../reference/calc_change_label.html">calc_change_label()</a></code>: Creates change labels for repeated measures of the HoNOS. This is an optional argument in the <code><a href="../reference/lag_honos.html">lag_honos()</a></code> function or can be used separately</li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">honos</span><span class="op">)</span>
+<span class="co">#&gt; This is honos 0.1.0</span>
+<span class="co">#&gt; honos is currently in development -function names and arguments might change.</span>
+<span class="co">#&gt; PLEASE REPORT ANY BUGS!</span>
 
 <span class="va">honos_wide</span> <span class="op">%&gt;%</span> 
   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>client_id <span class="op">=</span> <span class="va">id</span>, assessment_date <span class="op">=</span> <span class="va">date</span><span class="op">)</span> <span class="op">%&gt;%</span> 

@@ -101,6 +101,9 @@
       <a href="../articles/example_honos_datasets.html">Example HoNOS datasets</a>
     </li>
     <li>
+      <a href="../articles/honos_subscales.html">Analysing subscales of the HoNOS</a>
+    </li>
+    <li>
       <a href="../articles/lagged_honos_scores.html">Calculate lagged HoNOS scores</a>
     </li>
   </ul>
@@ -150,7 +153,61 @@
     <p>Labelled "factor"</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"></pre>
+    <pre class="examples"><div class='input'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fl'>0</span><span class='op'>:</span><span class='fl'>21</span>
+<span class='fu'>as_cluster_desc</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;  [1] Care Cluster 0: Variance                                                                
+#&gt;  [2] Care Cluster 1: Common mental health problems (Low severity)                            
+#&gt;  [3] Care Cluster 2: Common mental health problems (Low severity with greater need)          
+#&gt;  [4] Care Cluster 3: Non-psychotic (Moderate severity)                                       
+#&gt;  [5] Care Cluster 4: Non-psychotic (Severe)                                                  
+#&gt;  [6] Care Cluster 5: Non-psychotic disorders (Very severe)                                   
+#&gt;  [7] Care Cluster 6: Non-psychotic disorder of over-valued ideas                             
+#&gt;  [8] Care Cluster 7: Enduring non-psychotic disorders (High disability)                      
+#&gt;  [9] Care Cluster 8: Non-psychotic chaotic and challenging disorders                         
+#&gt; [10] Care Cluster 9: Blank cluster                                                           
+#&gt; [11] Care Cluster 10: First episode psychosis (With / without manic features)                
+#&gt; [12] Care Cluster 11: Ongoing recurrent psychosis (Low symptoms)                             
+#&gt; [13] Care Cluster 12: Ongoing or recurrent psychosis (High disability)                       
+#&gt; [14] Care Cluster 13: Ongoing or recurrent psychosis (High symptom and disability)           
+#&gt; [15] Care Cluster 14: Psychotic crisis                                                       
+#&gt; [16] Care Cluster 15: Severe psychotic depression                                            
+#&gt; [17] Care Cluster 16: Psychosis and affective disorder (High substance misuse and engagement)
+#&gt; [18] Care Cluster 17: Psychosis and affective disorder – difficult to engage                 
+#&gt; [19] Care Cluster 18: Cognitive impairment (Low need)                                        
+#&gt; [20] Care Cluster 19: Cognitive impairment or dementia complicated (Moderate need)           
+#&gt; [21] Care Cluster 20: Cognitive impairment or dementia complicated (High need)               
+#&gt; [22] Care Cluster 21: Cognitive impairment or dementia (High physical or engagement)         
+#&gt; 22 Levels: Care Cluster 0: Variance ...</div><div class='input'><span class='fu'>as_cluster_desc</span><span class='op'>(</span><span class='va'>x</span>, return <span class='op'>=</span> <span class='st'>"super_cluster"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;  [1] &lt;NA&gt;            A: Non-psycotic A: Non-psycotic A: Non-psycotic
+#&gt;  [5] A: Non-psycotic A: Non-psycotic A: Non-psycotic A: Non-psycotic
+#&gt;  [9] A: Non-psycotic A: Non-psycotic B: Psychosis    B: Psychosis   
+#&gt; [13] B: Psychosis    B: Psychosis    B: Psychosis    B: Psychosis   
+#&gt; [17] B: Psychosis    B: Psychosis    C: Organic      C: Organic     
+#&gt; [21] C: Organic      C: Organic     
+#&gt; Levels: A: Non-psycotic B: Psychosis C: Organic</div><div class='input'><span class='fu'>as_cluster_desc</span><span class='op'>(</span><span class='va'>x</span>, return <span class='op'>=</span> <span class='st'>"super_cluster"</span>, super_cluster_details <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;  [1] &lt;NA&gt;                                       
+#&gt;  [2] A: Non-psycotic (Very severe and complex   
+#&gt;  [3] A: Non-psycotic (Very severe and complex   
+#&gt;  [4] A: Non-psycotic (Very severe and complex   
+#&gt;  [5] A: Non-psycotic (Very severe and complex   
+#&gt;  [6] A: Non-psycotic (Mild, moderate, or severe)
+#&gt;  [7] A: Non-psycotic (Mild, moderate, or severe)
+#&gt;  [8] A: Non-psycotic (Mild, moderate, or severe)
+#&gt;  [9] A: Non-psycotic (Mild, moderate, or severe)
+#&gt; [10] A: Non-psycotic (Blank place marker)       
+#&gt; [11] B: Psychosis (First episode)               
+#&gt; [12] B: Psychosis (Ongoing or recurrent)        
+#&gt; [13] B: Psychosis (Ongoing or recurrent)        
+#&gt; [14] B: Psychosis (Ongoing or recurrent)        
+#&gt; [15] B: Psychosis (Psychotic crisis)            
+#&gt; [16] B: Psychosis (Psychotic crisis)            
+#&gt; [17] B: Psychosis (Very severe engagement)      
+#&gt; [18] B: Psychosis (Very severe engagement)      
+#&gt; [19] C: Organic (Cognitive impairment)          
+#&gt; [20] C: Organic (Cognitive impairment)          
+#&gt; [21] C: Organic (Cognitive impairment)          
+#&gt; [22] C: Organic (Cognitive impairment)          
+#&gt; 8 Levels: A: Non-psycotic (Blank place marker) ...</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

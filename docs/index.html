@@ -60,6 +60,9 @@
       <a href="articles/example_honos_datasets.html">Example HoNOS datasets</a>
     </li>
     <li>
+      <a href="articles/honos_subscales.html">Analysing subscales of the HoNOS</a>
+    </li>
+    <li>
       <a href="articles/lagged_honos_scores.html">Calculate lagged HoNOS scores</a>
     </li>
   </ul>
@@ -90,45 +93,39 @@
 <p>You can install the development version from <a href="https://github.com/">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"CDU-data-science-team/honos"</span><span class="op">)</span></code></pre></div>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"CDU-data-science-team/honos"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="functions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#functions" class="anchor"></a>Functions</h2>
-<p>See vignettes for further information.</p>
-<div id="add-labels-for-honos-items" class="section level4">
-<h4 class="hasAnchor">
-<a href="#add-labels-for-honos-items" class="anchor"></a>Add labels for HoNOS items</h4>
+<p>See vignettes using <code><a href="https://rdrr.io/r/utils/browseVignettes.html">browseVignettes(package = "honos")</a></code> for further information. The vignettes are also available at <a href="https://cdu-data-science-team.github.io/honos" class="uri">https://cdu-data-science-team.github.io/honos</a> (see “Articles”).</p>
+<div id="add-descriptions-to-honos-data" class="section level3">
+<h3 class="hasAnchor">
+<a href="#add-descriptions-to-honos-data" class="anchor"></a>Add descriptions to HoNOS data</h3>
 <ul>
 <li>
-<code><a href="reference/as_item_desc.html">as_item_desc()</a></code>: Add item descriptions (For 13 and 18 item versions of the HoNOS)</li>
-</ul>
-</div>
-<div id="add-labels-for-honos-severity-ratings" class="section level4">
-<h4 class="hasAnchor">
-<a href="#add-labels-for-honos-severity-ratings" class="anchor"></a>Add labels for HoNOS severity ratings</h4>
-<ul>
+<code><a href="reference/as_item_desc.html">as_item_desc()</a></code>: Add labels for HoNOS items</li>
 <li>
-<code><a href="reference/as_severity_desc.html">as_severity_desc()</a></code>: Add severity descriptions (Values ‘0’ to ‘4’)</li>
-</ul>
-</div>
-<div id="add-labels-for-honos-clusters" class="section level4">
-<h4 class="hasAnchor">
-<a href="#add-labels-for-honos-clusters" class="anchor"></a>Add labels for HoNOS clusters</h4>
-<ul>
+<code><a href="reference/as_severity_desc.html">as_severity_desc()</a></code>: Add labels for HoNOS severity ratings</li>
 <li>
-<code><a href="reference/as_cluster_desc.html">as_cluster_desc()</a></code>: Describe clusters (Values: 0 to 21)</li>
+<code><a href="reference/as_cluster_desc.html">as_cluster_desc()</a></code>: Add labels for HoNOS clusters</li>
 </ul>
 </div>
-<div id="calculate-lagged-honos-scores" class="section level4">
-<h4 class="hasAnchor">
-<a href="#calculate-lagged-honos-scores" class="anchor"></a>Calculate lagged HoNOS scores</h4>
+<div id="calculations" class="section level3">
+<h3 class="hasAnchor">
+<a href="#calculations" class="anchor"></a>Calculations</h3>
 <ul>
 <li>
 <code><a href="reference/lag_honos.html">lag_honos()</a></code>: Calculate lagged scores based on a date variable and calculate change labels (e.g., “high to low,” or ‘deterioration’)</li>
 <li>
-<code><a href="reference/as_change_label.html">as_change_label()</a></code>: Creates change labels for repeated measures of the HoNOS. This is an optional argument in the <code><a href="reference/lag_honos.html">lag_honos()</a></code> function or can be used separately</li>
+<code><a href="reference/calc_change_label.html">calc_change_label()</a></code>: Calculates change labels for repeated measures of the HoNOS</li>
+<li>
+<code><a href="reference/calc_honos_subscales.html">calc_honos_subscales()</a></code>: Calculates sums of HoNOS subscales</li>
 </ul>
+<div id="calculate-sum-of-subscales" class="section level4">
+<h4 class="hasAnchor">
+<a href="#calculate-sum-of-subscales" class="anchor"></a>Calculate sum of subscales</h4>
+</div>
 </div>
 </div>
 <div id="resources" class="section level2">

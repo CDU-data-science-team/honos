@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 ## Calculate lagged scores
 
 - `lag_honos()`: Calculate lagged scores based on a date variable and calculate change labels (e.g., "high to low", or 'deterioration')
-- `as_change_label()`: Creates change labels for repeated measures of the HoNOS. This is an optional argument in the `lag_honos()` function or can be used separately
+- `calc_change_label()`: Creates change labels for repeated measures of the HoNOS. This is an optional argument in the `lag_honos()` function or can be used separately
 
 ```{r}
 

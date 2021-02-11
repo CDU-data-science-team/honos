@@ -3,7 +3,7 @@
 #' @param data Dataframe in wide format (i.e., one row for each HoNOS assessment and one column for each HoNOS item)
 #' @param id_var Name of variable that uniquely identifies each individual
 #' @param date_var Name of date (or datetime) variable
-#' @param add_change_label Logical, specifying whether to add a variable that describes the change using the function \code{\link{as_change_label}}
+#' @param add_change_label Logical, specifying whether to add a variable that describes the change using the function \code{\link{calc_change_label}}
 #' @param change_label String, specifying whether to describe the change using "high_low" (e.g., HL stands for high to low) or "deterio_improve" (Deterioration, Unchanged, Improved)
 #'
 #' @return Dataframe with original data and lagged values
@@ -56,7 +56,7 @@ lag_honos <- function(data, id_var, date_var, add_change_label = TRUE, change_la
   if (add_change_label == TRUE) {
 
     data_change <- data_change %>%
-      dplyr::mutate(honos_change_label = as_change_label(value = honos,
+      dplyr::mutate(honos_change_label = calc_change_label(value = honos,
                                                          lag_value = lag1honos,
                                                          change_label = change_label))
 
@@ -81,9 +81,9 @@ lag_honos <- function(data, id_var, date_var, add_change_label = TRUE, change_la
 #' @export
 #'
 #' @examples
-#' as_change_label(value = 0, lag_value = 4,
+#' calc_change_label(value = 0, lag_value = 4,
 #'                 change_label = "deterio_improve")
-as_change_label <- function(value, lag_value, change_label = c("high_low", "deterio_improve")) {
+calc_change_label <- function(value, lag_value, change_label = c("high_low", "deterio_improve")) {
 
   change_label <- match.arg(change_label)
 
