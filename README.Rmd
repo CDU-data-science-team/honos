@@ -51,9 +51,6 @@ The vignettes are also available at https://cdu-data-science-team.github.io/hono
 - `calc_change_label()`: Calculates change labels for repeated measures of the HoNOS
 - `calc_honos_subscales()`: Calculates sums of HoNOS subscales
 
-
-#### Calculate sum of subscales
-
 ## Resources
 
 - https://improvement.nhs.uk/documents/485/Annex_DtE_Mental_health_clustering_tool.pdf

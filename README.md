@@ -44,8 +44,6 @@ information. The vignettes are also available at
     measures of the HoNOS
 -   `calc_honos_subscales()`: Calculates sums of HoNOS subscales
 
-#### Calculate sum of subscales
-
 ## Resources
 
 -   <https://improvement.nhs.uk/documents/485/Annex_DtE_Mental_health_clustering_tool.pdf>
