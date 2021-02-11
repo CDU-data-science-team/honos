@@ -26,12 +26,9 @@ devtools::install_github("CDU-data-science-team/honos", build_vignettes = TRUE)
 
 ## Functions
 
-See vignettes for further information.
-
-``` r
-browseVignettes(package = "honos")
-#> No vignettes found by browseVignettes(package = "honos")
-```
+See vignettes using `browseVignettes(package = "honos")` for further
+information. The vignettes are also available at
+<https://cdu-data-science-team.github.io/honos> (see “Articles”).
 
 #### Add labels for HoNOS items
 
