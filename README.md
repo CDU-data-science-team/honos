@@ -44,6 +44,24 @@ information. The vignettes are also available at
     measures of the HoNOS
 -   `calc_subscales()`: Calculates sums of HoNOS subscales
 
+### Random tests
+
+``` r
+rename_honos(data = honos::honos_wide,
+             value_vars_current <- c("asd1", "asd2",  "asd3", "asd4","asd5", "asd6", "asd7",  "asd8", "asd9", "asd10", "asd11",  "asd12", "asd13"),
+             prob_var_item8 <- c("asd8p"),
+             sepc_var_item8 <- c("asd8s"),
+             value_vars_history <- c("asd14", "asd15", "asd16", "asd17", "asd18"))
+
+
+vars <- c("id", "date","measure", "itemA")
+names_data <- names(honos::honos_long)
+
+
+names_data %in% vars
+all(vars %in% names_data)
+```
+
 ## Resources
 
 -   <https://improvement.nhs.uk/documents/485/Annex_DtE_Mental_health_clustering_tool.pdf>

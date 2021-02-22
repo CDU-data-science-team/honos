@@ -30,19 +30,6 @@ The package comes with a simulated datasets of HoNOS scores (13-items) that is a
 library(honos)
 
 # Show fist 5 ids
-honos_long %>% 
-  dplyr::filter(id %in% paste0("id", 1:5))
-```
-
-#### Wide format
-
-- `id`: Unique identifier 
-- `date`: Date variable
-- `measure`: Description of measure
-- `honos_i1` to `honos_i13`: HoNOS score for each item
-
-```{r}
-# Show fist 5 ids
-honos_wide %>% 
+honos_data %>% 
   dplyr::filter(id %in% paste0("id", 1:5))
 ```

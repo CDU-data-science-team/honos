@@ -5,6 +5,7 @@
 \title{Helper function to rename HoNOS variables}
 \usage{
 rename_honos(
+  data,
   value_vars_current,
   prob_var_item8,
   spec_var_item8,

@@ -1,5 +1,6 @@
 #' Helper function to rename HoNOS variables
 #'
+#' @param data
 #' @param value_vars_current Vector, specifying variable names with values for 'current' items
 #' @param prob_var_item8 Vector, specifying variable name with description of problem (prob) for item 8
 #' @param spec_var_item8 Vector, specifying variable name with problem specification (spec) of for item 8
@@ -10,7 +11,7 @@
 #' @export
 #'
 #' @examples
-rename_honos <- function(value_vars_current, prob_var_item8, spec_var_item8, value_vars_history, honos_version = c("working_adults")) {
+rename_honos <- function(data, value_vars_current, prob_var_item8, spec_var_item8, value_vars_history, honos_version = c("working_adults")) {
 
   honos_version <- match.arg(honos_version)
 
@@ -22,7 +23,6 @@ rename_honos <- function(value_vars_current, prob_var_item8, spec_var_item8, val
   }
 
   # check if vectors have the correct length
-
   if (length(value_vars_current) != n_honos_vars_check[["n_value_vars_current"]]) {
     stop(paste0("Specify n = ", n_honos_vars_check[["n_value_vars_current"]] ," variables in 'value_vars_current'."), call. = FALSE)
   }
@@ -43,15 +43,17 @@ rename_honos <- function(value_vars_current, prob_var_item8, spec_var_item8, val
     stop("Variable names must be unique.", call. = FALSE)
   }
 
+  # check that variables are present in data
 
-message("YEAH")
+  if (all(c(value_vars_current, prob_var_item8, spec_var_item8, value_vars_history) %in% names(data)) == FALSE) {
+
+    stop("Specified variables must be present in 'data'.", call. = FALSE)
+
+  }
+  # start renaming
+
+
+  message("YEAH")
 
 
 }
-
-rename_honos(
-  value_vars_current <- c("asd1", "asd2",  "asd3", "asd4","asd5", "asd6", "asd7",  "asd8", "asd9", "asd10", "asd11",  "asd12", "asd13"),
-  prob_var_item8 <- c("asd8p"),
-  sepc_var_item8 <- c("asd8s"),
-  value_vars_history <- c("asd14", "asd15", "asd16", "asd17", "asd18")
-  )

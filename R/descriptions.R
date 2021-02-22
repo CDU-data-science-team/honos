@@ -84,7 +84,6 @@ as_item_desc <- function(x, n_items) {
                   "Scale 11: Living conditions",
                   "Scale 12: Occupation & Activities",
                   "Scale 13: Strong unreasonable beliefs",
-
                   "Scale A: Agitated behaviour/expansive mood",
                   "Scale B: Repeat Self-Harm",
                   "Scale C: Safeguarding other children & vulnerable dependant adults",
