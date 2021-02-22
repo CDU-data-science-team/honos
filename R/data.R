@@ -1,14 +1,18 @@
+#' @importFrom tibble tibble
+NULL
+
+
+
 #' Example dataset dataset with repeated measures of HoNOS scores in wide format
 #'
 #' @description Example dataset with repeated measures of the Health of the Nation Outcome Scales (HoNOS) to illustrate how the package works and test functions.
-#' The data was created by hand, see the "/raw-data" folder on \url{https://github.com/CDU-data-science-team/honos/blob/main/data-raw/DATASET.R}.
+#' The data was created by hand, see here: \url{https://github.com/CDU-data-science-team/honos/blob/main/data-raw/DATASET.R}.
 #' @docType data
 #' @usage data(honos_data)
 #' @format A longitudinal dataset in wide format, i.e one row per person, one column per variable.
 #' \itemize{
 #'   \item{id}{: ID variable, unique identifier for each person}
 #'   \item{date}{: Date of HoNOS assesmment}
-#'   \item{measure}{: Sting, specifying measure}
 #'   \item{team}{: String, specifying team}
 #'   \item{stage}{: String, specifying stage of assessment point (e.g., pre, mid, post)}
 #'    \item{q1}{: Scale 1 - Overactive, aggressive, disruptive or agitated behaviour}

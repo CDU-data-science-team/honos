@@ -32,8 +32,9 @@ as_severity_desc <- function(x, na_level = NULL) {
 
 #' Convert HoNOS item numbers to labelled factor
 #' @description Types of other mental and behavioural problems specified in Item 8 can be labelled using the function \code{\link{as_i8_desc}}
+#'
 #' @param x Vector of item numbers
-#' @param n_items Numeric, specifying maximum number of items
+#' @param .ignore_n_items Logical, if TRUE the specified vector does not check the item number and assumes that the 18 item "working adults" version that includes current and historical scales.
 #'
 #' @return Labelled "factor"
 #' @export
@@ -41,7 +42,26 @@ as_severity_desc <- function(x, na_level = NULL) {
 #' @examples
 #' x <- 1:13
 #' as_item_desc(x, n_items = 13)
-as_item_desc <- function(x, n_items) {
+as_item_desc <- function(x, .ignore_n_items = FALSE) {
+
+  # Check max number of items
+  n_items <- max(x, na.rm = TRUE)
+
+  # ADD max number of items for each implemented HoNOS versions here
+  n_items_available <- c(13, 18)
+
+  if (.ignore_n_items == FALSE) {
+
+    # Check if max number of items is already implemented in this version of the package
+    if (!n_items %in% n_items_available == TRUE) {
+      stop("The maximum number of items in x (n = ", n_items, ") is currently not implemented.\nYou can ignore this behaviour by adding the argument '.ignore_n_items = FALSE'.", call. = FALSE)
+    }
+
+  } else if (.ignore_n_items == TRUE) {
+
+    n_items <- 18
+
+  }
 
   # CURRENT
   if (n_items == 13) {
@@ -92,11 +112,7 @@ as_item_desc <- function(x, n_items) {
                 )
     )
 
-  } else if (n_items != 13 & n_items != 18) {
-
-    stop("This version if the HoNOS is currently not supported.")
-
-    }
+  }
 
   return(x)
 

@@ -25,5 +25,5 @@ Calculate change labels for lagged change scores
 }
 \examples{
 calc_change_label(value = 0, lag_value = 4,
-                change_label = "deterio_improve")
+                  change_label = "deterio_improve")
 }

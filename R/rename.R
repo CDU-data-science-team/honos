@@ -1,6 +1,6 @@
 #' Helper function to rename HoNOS variables
 #'
-#' @param data
+#' @param data Dataset including HoNOS variables in wide format (i.e., one row per assessment, one column per item)
 #' @param value_vars_current Vector, specifying variable names with values for 'current' items
 #' @param prob_var_item8 Vector, specifying variable name with description of problem (prob) for item 8
 #' @param spec_var_item8 Vector, specifying variable name with problem specification (spec) of for item 8
@@ -11,7 +11,13 @@
 #' @export
 #'
 #' @examples
-rename_honos <- function(data, value_vars_current, prob_var_item8, spec_var_item8, value_vars_history, honos_version = c("working_adults")) {
+#' rename_honos(data = honos::honos_data,
+#'              value_vars_current = c("q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8", "q9", "q10", "q11", "q12", "q13"),
+#'              prob_var_item8 = c("q8_prob"),
+#'              spec_var_item8 = c("q8_spec"),
+#'              value_vars_history = c("qa", "qb", "qc", "qd", "qe")
+#'              )
+rename_honos <- function(data, value_vars_current, prob_var_item8, spec_var_item8, value_vars_history, honos_version = c("working_adults"), .return_new_var_names = FALSE) {
 
   honos_version <- match.arg(honos_version)
 
@@ -50,10 +56,33 @@ rename_honos <- function(data, value_vars_current, prob_var_item8, spec_var_item
     stop("Specified variables must be present in 'data'.", call. = FALSE)
 
   }
-  # start renaming
 
 
-  message("YEAH")
+  # Create vector of consistent variable names for honos 13 item version
+  # TODO this needs to be changed for other versions of the honos
+  honos_scales_new_names <- c(paste0("honos", "_", "i", 1:8, "_value"),
+                              c("honos_i8_prob", "honos_i8_spec"),
+                              paste0("honos", "_", "i", 9:13, "_value"),
+                              paste0("honos", "_", "i", 14:18, "_value"))
+
+  # TODO I might need to add a check here to make sure that none of these new variables names already exist in the data sets specified in 'data'
+
+
+  if (.return_new_var_names == TRUE) {
+
+    return(honos_scales_new_names)
+
+  } else if (.return_new_var_names == FALSE) {
+
+    # create object for rename function
+    honos_scales_rename <- setNames(object = c(value_vars_current[1:8], prob_var_item8, spec_var_item8, value_vars_current[9:13], value_vars_history),
+                                    nm = honos_scales_new_names)
+
+    # rename variables ...
+    data %>%
+      dplyr::rename(dplyr::all_of(honos_scales_rename))
+
+  }
 
 
 }

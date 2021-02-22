@@ -82,7 +82,7 @@ lag_honos <- function(data, id_var, date_var, add_change_label = TRUE, change_la
 #'
 #' @examples
 #' calc_change_label(value = 0, lag_value = 4,
-#'                 change_label = "deterio_improve")
+#'                   change_label = "deterio_improve")
 calc_change_label <- function(value, lag_value, change_label = c("high_low", "deterio_improve")) {
 
   change_label <- match.arg(change_label)

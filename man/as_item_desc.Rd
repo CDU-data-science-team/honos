@@ -4,12 +4,12 @@
 \alias{as_item_desc}
 \title{Convert HoNOS item numbers to labelled factor}
 \usage{
-as_item_desc(x, n_items)
+as_item_desc(x, .ignore_n_items = FALSE)
 }
 \arguments{
 \item{x}{Vector of item numbers}
 
-\item{n_items}{Numeric, specifying maximum number of items}
+\item{.ignore_n_items}{Logical, if TRUE the specified vector does not check the item number and assumes that the 18 item "working adults" version that includes current and historical scales.}
 }
 \value{
 Labelled "factor"

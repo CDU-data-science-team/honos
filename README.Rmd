@@ -54,22 +54,52 @@ The vignettes are also available at https://cdu-data-science-team.github.io/hono
 
 ### Random tests
 
-```{r eval=FALSE}
-
-rename_honos(data = honos::honos_wide,
-             value_vars_current <- c("asd1", "asd2",  "asd3", "asd4","asd5", "asd6", "asd7",  "asd8", "asd9", "asd10", "asd11",  "asd12", "asd13"),
-             prob_var_item8 <- c("asd8p"),
-             sepc_var_item8 <- c("asd8s"),
-             value_vars_history <- c("asd14", "asd15", "asd16", "asd17", "asd18"))
 
 
-vars <- c("id", "date","measure", "itemA")
-names_data <- names(honos::honos_long)
+
+```{r}
+library(honos)
+
+honos_long <- honos_data %>% 
+  pivot_honos_longer(value_vars_current = c("q1", "q2", "q3", "q4", "q5", "q6", "q7", 
+                                            "q8", "q9", "q10", "q11", "q12", "q13"),
+                     prob_var_item8 = c("q8_prob"),
+                     spec_var_item8 = c("q8_spec"),
+                     value_vars_history = c("qa", "qb", "qc", "qd", "qe"), 
+                     pivot = "all_items")
 
 
-names_data %in% vars
-all(vars %in% names_data)
+honos_long
 
+```
+
+```{r}
+
+honos_longish <- honos_data %>% 
+  pivot_honos_longer(value_vars_current = c("q1", "q2", "q3", "q4", "q5", "q6", "q7", 
+                                            "q8", "q9", "q10", "q11", "q12", "q13"),
+                     prob_var_item8 = c("q8_prob"),
+                     spec_var_item8 = c("q8_spec"),
+                     value_vars_history = c("qa", "qb", "qc", "qd", "qe"), 
+                     pivot = "item_scores")
+```
+
+```{r}
+# make use of all these description functions I wrote
+honos_longish %>% 
+  dplyr::mutate(item = as_item_desc(item)) %>% 
+  dplyr::mutate(prob = as_i8_desc(prob)) %>% 
+  dplyr::mutate(value = as_severity_desc(value))
+
+```
+
+
+```{r}
+# not sure if this is ever needed but might be useful when filtering for all cases where item 8 is a particular problem
+honos_longish  %>% 
+  dplyr::group_by(id, date, team) %>% 
+  tidyr::fill(prob, .direction = "downup")
+                
 ```
 
 

@@ -47,19 +47,89 @@ information. The vignettes are also available at
 ### Random tests
 
 ``` r
-rename_honos(data = honos::honos_wide,
-             value_vars_current <- c("asd1", "asd2",  "asd3", "asd4","asd5", "asd6", "asd7",  "asd8", "asd9", "asd10", "asd11",  "asd12", "asd13"),
-             prob_var_item8 <- c("asd8p"),
-             sepc_var_item8 <- c("asd8s"),
-             value_vars_history <- c("asd14", "asd15", "asd16", "asd17", "asd18"))
+library(honos)
+#> This is honos 0.1.1
+#> honos is currently in development -function names and arguments might change.
+#> PLEASE REPORT ANY BUGS!
+
+honos_long <- honos_data %>% 
+  pivot_honos_longer(value_vars_current = c("q1", "q2", "q3", "q4", "q5", "q6", "q7", 
+                                            "q8", "q9", "q10", "q11", "q12", "q13"),
+                     prob_var_item8 = c("q8_prob"),
+                     spec_var_item8 = c("q8_spec"),
+                     value_vars_history = c("qa", "qb", "qc", "qd", "qe"), 
+                     pivot = "all_items")
 
 
-vars <- c("id", "date","measure", "itemA")
-names_data <- names(honos::honos_long)
+honos_long
+#> # A tibble: 360 x 8
+#>    id    date       team  stage measure  item type  value
+#>    <chr> <chr>      <chr> <chr> <chr>   <dbl> <chr> <chr>
+#>  1 id1   2020-04-20 team2 pre   honos       1 value 1    
+#>  2 id1   2020-04-20 team2 pre   honos       2 value 2    
+#>  3 id1   2020-04-20 team2 pre   honos       3 value 4    
+#>  4 id1   2020-04-20 team2 pre   honos       4 value 2    
+#>  5 id1   2020-04-20 team2 pre   honos       5 value 2    
+#>  6 id1   2020-04-20 team2 pre   honos       6 value 4    
+#>  7 id1   2020-04-20 team2 pre   honos       7 value 3    
+#>  8 id1   2020-04-20 team2 pre   honos       8 value 4    
+#>  9 id1   2020-04-20 team2 pre   honos       8 prob  A    
+#> 10 id1   2020-04-20 team2 pre   honos       8 spec  <NA> 
+#> # ... with 350 more rows
+```
 
+``` r
+honos_longish <- honos_data %>% 
+  pivot_honos_longer(value_vars_current = c("q1", "q2", "q3", "q4", "q5", "q6", "q7", 
+                                            "q8", "q9", "q10", "q11", "q12", "q13"),
+                     prob_var_item8 = c("q8_prob"),
+                     spec_var_item8 = c("q8_spec"),
+                     value_vars_history = c("qa", "qb", "qc", "qd", "qe"), 
+                     pivot = "item_scores")
+```
 
-names_data %in% vars
-all(vars %in% names_data)
+``` r
+# make use of all these description functions I wrote
+honos_longish %>% 
+  dplyr::mutate(item = as_item_desc(item)) %>% 
+  dplyr::mutate(prob = as_i8_desc(prob)) %>% 
+  dplyr::mutate(value = as_severity_desc(value))
+#> # A tibble: 324 x 9
+#>    id    date    team  stage measure item               value      prob    spec 
+#>    <chr> <chr>   <chr> <chr> <chr>   <fct>              <fct>      <fct>   <chr>
+#>  1 id1   2020-0~ team2 pre   honos   Scale 1: Overacti~ Minor pro~ <NA>    <NA> 
+#>  2 id1   2020-0~ team2 pre   honos   Scale 2: Non-acci~ Mild prob~ <NA>    <NA> 
+#>  3 id1   2020-0~ team2 pre   honos   Scale 3: Problem ~ Severe to~ <NA>    <NA> 
+#>  4 id1   2020-0~ team2 pre   honos   Scale 4: Cognitiv~ Mild prob~ <NA>    <NA> 
+#>  5 id1   2020-0~ team2 pre   honos   Scale 5: Physical~ Mild prob~ <NA>    <NA> 
+#>  6 id1   2020-0~ team2 pre   honos   Scale 6: Hallucin~ Severe to~ <NA>    <NA> 
+#>  7 id1   2020-0~ team2 pre   honos   Scale 7: Depresse~ Moderatel~ <NA>    <NA> 
+#>  8 id1   2020-0~ team2 pre   honos   Scale 8: Other me~ Severe to~ Type A~ <NA> 
+#>  9 id1   2020-0~ team2 pre   honos   Scale 9: Relation~ Mild prob~ <NA>    <NA> 
+#> 10 id1   2020-0~ team2 pre   honos   Scale 10: Activit~ Moderatel~ <NA>    <NA> 
+#> # ... with 314 more rows
+```
+
+``` r
+# not sure if this is ever needed but might be useful when filtering for all cases where item 8 is a particular problem
+honos_longish  %>% 
+  dplyr::group_by(id, date, team) %>% 
+  tidyr::fill(prob, .direction = "downup")
+#> # A tibble: 324 x 9
+#> # Groups:   id, date, team [18]
+#>    id    date       team  stage measure  item value prob  spec 
+#>    <chr> <chr>      <chr> <chr> <chr>   <dbl> <dbl> <chr> <chr>
+#>  1 id1   2020-04-20 team2 pre   honos       1     1 A     <NA> 
+#>  2 id1   2020-04-20 team2 pre   honos       2     2 A     <NA> 
+#>  3 id1   2020-04-20 team2 pre   honos       3     4 A     <NA> 
+#>  4 id1   2020-04-20 team2 pre   honos       4     2 A     <NA> 
+#>  5 id1   2020-04-20 team2 pre   honos       5     2 A     <NA> 
+#>  6 id1   2020-04-20 team2 pre   honos       6     4 A     <NA> 
+#>  7 id1   2020-04-20 team2 pre   honos       7     3 A     <NA> 
+#>  8 id1   2020-04-20 team2 pre   honos       8     4 A     <NA> 
+#>  9 id1   2020-04-20 team2 pre   honos       9     2 A     <NA> 
+#> 10 id1   2020-04-20 team2 pre   honos      10     3 A     <NA> 
+#> # ... with 314 more rows
 ```
 
 ## Resources
