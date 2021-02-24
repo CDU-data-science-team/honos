@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">honos</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9001</span>
       </span>
     </div>
 
@@ -99,95 +99,40 @@
 <code><a href="../reference/as_item_desc.html">as_item_desc()</a></code>: Add item descriptions (For 13 and 18 item versions of the HoNOS)</li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">honos</span><span class="op">)</span>
-<span class="co">#&gt; This is honos 0.1.1</span>
-<span class="co">#&gt; honos is currently in development -function names and arguments might change.</span>
-<span class="co">#&gt; PLEASE REPORT ANY BUGS!</span>
-
-<span class="va">honos_long</span> <span class="op">%&gt;%</span> 
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>item_desc <span class="op">=</span> <span class="fu"><a href="../reference/as_item_desc.html">as_item_desc</a></span><span class="op">(</span><span class="va">item</span>, n_items <span class="op">=</span> <span class="fl">13</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 39,000 x 6</span>
-<span class="co">#&gt;    id    date       measure item  value item_desc                               </span>
-<span class="co">#&gt;    &lt;fct&gt; &lt;date&gt;     &lt;chr&gt;   &lt;fct&gt; &lt;dbl&gt; &lt;fct&gt;                                   </span>
-<span class="co">#&gt;  1 id1   2018-08-05 honos   1         2 Scale 1: Overactive, aggressive, disrup…</span>
-<span class="co">#&gt;  2 id1   2018-08-05 honos   2         4 Scale 2: Non-accidental self-injury     </span>
-<span class="co">#&gt;  3 id1   2018-08-05 honos   3         2 Scale 3: Problem drinking or drug taking</span>
-<span class="co">#&gt;  4 id1   2018-08-05 honos   4         3 Scale 4: Cognitive problems             </span>
-<span class="co">#&gt;  5 id1   2018-08-05 honos   5         2 Scale 5: Physical illness or disability…</span>
-<span class="co">#&gt;  6 id1   2018-08-05 honos   6        NA Scale 6: Hallucinations and Delusions   </span>
-<span class="co">#&gt;  7 id1   2018-08-05 honos   7         1 Scale 7: Depressed mood                 </span>
-<span class="co">#&gt;  8 id1   2018-08-05 honos   8         0 Scale 8: Other mental and behavioural p…</span>
-<span class="co">#&gt;  9 id1   2018-08-05 honos   9         1 Scale 9: Relationships                  </span>
-<span class="co">#&gt; 10 id1   2018-08-05 honos   10        3 Scale 10: Activities of daily living    </span>
-<span class="co">#&gt; # … with 38,990 more rows</span></code></pre></div>
-<p>In item 8, the clinician can specify 10 different categories. The function <code><a href="../reference/as_i8_desc.html">as_i8_desc()</a></code> can be used to add more detailed labels, for example:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/as_i8_desc.html">as_i8_desc</a></span><span class="op">(</span><span class="st">"B"</span><span class="op">)</span>
-<span class="co">#&gt; [1] Type B: Anxiety</span>
-<span class="co">#&gt; 10 Levels: Type A: Phobic Type B: Anxiety ... Type J: Other, specify</span></code></pre></div>
-</div>
-<div id="describe-honos-severity-scores" class="section level2">
-<h2 class="hasAnchor">
-<a href="#describe-honos-severity-scores" class="anchor"></a>Describe HoNOS severity scores</h2>
-<ul>
-<li>
-<code><a href="../reference/as_severity_desc.html">as_severity_desc()</a></code>: Add severity descriptions (Values ‘0’ to ‘4’)</li>
-</ul>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">honos</span><span class="op">)</span>
-
-<span class="va">honos_long</span> <span class="op">%&gt;%</span> 
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>value_desc <span class="op">=</span> <span class="fu"><a href="../reference/as_severity_desc.html">as_severity_desc</a></span><span class="op">(</span><span class="va">value</span>, na_level <span class="op">=</span> <span class="st">"I AM A MISSING VALUE"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 39,000 x 6</span>
-<span class="co">#&gt;    id    date       measure item  value value_desc                   </span>
-<span class="co">#&gt;    &lt;fct&gt; &lt;date&gt;     &lt;chr&gt;   &lt;fct&gt; &lt;dbl&gt; &lt;fct&gt;                        </span>
-<span class="co">#&gt;  1 id1   2018-08-05 honos   1         2 Mild problem                 </span>
-<span class="co">#&gt;  2 id1   2018-08-05 honos   2         4 Severe to very severe problem</span>
-<span class="co">#&gt;  3 id1   2018-08-05 honos   3         2 Mild problem                 </span>
-<span class="co">#&gt;  4 id1   2018-08-05 honos   4         3 Moderately severe problem    </span>
-<span class="co">#&gt;  5 id1   2018-08-05 honos   5         2 Mild problem                 </span>
-<span class="co">#&gt;  6 id1   2018-08-05 honos   6        NA I AM A MISSING VALUE         </span>
-<span class="co">#&gt;  7 id1   2018-08-05 honos   7         1 Minor problem                </span>
-<span class="co">#&gt;  8 id1   2018-08-05 honos   8         0 No problem                   </span>
-<span class="co">#&gt;  9 id1   2018-08-05 honos   9         1 Minor problem                </span>
-<span class="co">#&gt; 10 id1   2018-08-05 honos   10        3 Moderately severe problem    </span>
-<span class="co">#&gt; # … with 38,990 more rows</span></code></pre></div>
-</div>
-<div id="describe-clusters" class="section level2">
-<h2 class="hasAnchor">
-<a href="#describe-clusters" class="anchor"></a>Describe clusters</h2>
-<ul>
-<li>
-<code><a href="../reference/as_cluster_desc.html">as_cluster_desc()</a></code>: Describe clusters (Values: 0 to 21)</li>
-</ul>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">honos</span><span class="op">)</span>
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">0</span><span class="op">:</span><span class="fl">21</span>
-<span class="fu"><a href="../reference/as_cluster_desc.html">as_cluster_desc</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-<span class="co">#&gt;  [1] Care Cluster 0: Variance                                                                </span>
-<span class="co">#&gt;  [2] Care Cluster 1: Common mental health problems (Low severity)                            </span>
-<span class="co">#&gt;  [3] Care Cluster 2: Common mental health problems (Low severity with greater need)          </span>
-<span class="co">#&gt;  [4] Care Cluster 3: Non-psychotic (Moderate severity)                                       </span>
-<span class="co">#&gt;  [5] Care Cluster 4: Non-psychotic (Severe)                                                  </span>
-<span class="co">#&gt;  [6] Care Cluster 5: Non-psychotic disorders (Very severe)                                   </span>
-<span class="co">#&gt;  [7] Care Cluster 6: Non-psychotic disorder of over-valued ideas                             </span>
-<span class="co">#&gt;  [8] Care Cluster 7: Enduring non-psychotic disorders (High disability)                      </span>
-<span class="co">#&gt;  [9] Care Cluster 8: Non-psychotic chaotic and challenging disorders                         </span>
-<span class="co">#&gt; [10] Care Cluster 9: Blank cluster                                                           </span>
-<span class="co">#&gt; [11] Care Cluster 10: First episode psychosis (With / without manic features)                </span>
-<span class="co">#&gt; [12] Care Cluster 11: Ongoing recurrent psychosis (Low symptoms)                             </span>
-<span class="co">#&gt; [13] Care Cluster 12: Ongoing or recurrent psychosis (High disability)                       </span>
-<span class="co">#&gt; [14] Care Cluster 13: Ongoing or recurrent psychosis (High symptom and disability)           </span>
-<span class="co">#&gt; [15] Care Cluster 14: Psychotic crisis                                                       </span>
-<span class="co">#&gt; [16] Care Cluster 15: Severe psychotic depression                                            </span>
-<span class="co">#&gt; [17] Care Cluster 16: Psychosis and affective disorder (High substance misuse and engagement)</span>
-<span class="co">#&gt; [18] Care Cluster 17: Psychosis and affective disorder – difficult to engage                 </span>
-<span class="co">#&gt; [19] Care Cluster 18: Cognitive impairment (Low need)                                        </span>
-<span class="co">#&gt; [20] Care Cluster 19: Cognitive impairment or dementia complicated (Moderate need)           </span>
-<span class="co">#&gt; [21] Care Cluster 20: Cognitive impairment or dementia complicated (High need)               </span>
-<span class="co">#&gt; [22] Care Cluster 21: Cognitive impairment or dementia (High physical or engagement)         </span>
-<span class="co">#&gt; 22 Levels: Care Cluster 0: Variance ...</span></code></pre></div>
+<span class="co">#&gt; This is honos 0.1.1.9001</span>
+<span class="co">#&gt; honos is currently in development - function names and arguments might change.</span>
+<span class="co">#&gt; PLEASE REPORT ANY BUGS OR IDEAS!</span>
+
+<span class="va">honos_longish</span> <span class="op">&lt;-</span> <span class="va">honos_data</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/pivot_honos_longer.html">pivot_honos_longer</a></span><span class="op">(</span>value_vars_current <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"q1"</span>, <span class="st">"q2"</span>, <span class="st">"q3"</span>, <span class="st">"q4"</span>, <span class="st">"q5"</span>, <span class="st">"q6"</span>, <span class="st">"q7"</span>, 
+                                            <span class="st">"q8"</span>, <span class="st">"q9"</span>, <span class="st">"q10"</span>, <span class="st">"q11"</span>, <span class="st">"q12"</span>, <span class="st">"q13"</span><span class="op">)</span>,
+                     prob_var_item8 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"q8_prob"</span><span class="op">)</span>,
+                     spec_var_item8 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"q8_spec"</span><span class="op">)</span>,
+                     value_vars_history <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"qa"</span>, <span class="st">"qb"</span>, <span class="st">"qc"</span>, <span class="st">"qd"</span>, <span class="st">"qe"</span><span class="op">)</span>, 
+                     pivot <span class="op">=</span> <span class="st">"item_scores"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="co"># make use of all these description functions I wrote</span>
+<span class="va">honos_longish</span> <span class="op">%&gt;%</span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>item <span class="op">=</span> <span class="fu"><a href="../reference/as_item_desc.html">as_item_desc</a></span><span class="op">(</span><span class="va">item</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>prob <span class="op">=</span> <span class="fu"><a href="../reference/as_i8_desc.html">as_i8_desc</a></span><span class="op">(</span><span class="va">prob</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>value <span class="op">=</span> <span class="fu"><a href="../reference/as_severity_desc.html">as_severity_desc</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 324 x 9</span>
+<span class="co">#&gt;    id    date    team  stage measure item               value      prob    spec </span>
+<span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;fct&gt;              &lt;fct&gt;      &lt;fct&gt;   &lt;chr&gt;</span>
+<span class="co">#&gt;  1 id1   2020-0… team2 pre   honos   Scale 1: Overacti… Minor pro… &lt;NA&gt;    &lt;NA&gt; </span>
+<span class="co">#&gt;  2 id1   2020-0… team2 pre   honos   Scale 2: Non-acci… Mild prob… &lt;NA&gt;    &lt;NA&gt; </span>
+<span class="co">#&gt;  3 id1   2020-0… team2 pre   honos   Scale 3: Problem … Severe to… &lt;NA&gt;    &lt;NA&gt; </span>
+<span class="co">#&gt;  4 id1   2020-0… team2 pre   honos   Scale 4: Cognitiv… Mild prob… &lt;NA&gt;    &lt;NA&gt; </span>
+<span class="co">#&gt;  5 id1   2020-0… team2 pre   honos   Scale 5: Physical… Mild prob… &lt;NA&gt;    &lt;NA&gt; </span>
+<span class="co">#&gt;  6 id1   2020-0… team2 pre   honos   Scale 6: Hallucin… Severe to… &lt;NA&gt;    &lt;NA&gt; </span>
+<span class="co">#&gt;  7 id1   2020-0… team2 pre   honos   Scale 7: Depresse… Moderatel… &lt;NA&gt;    &lt;NA&gt; </span>
+<span class="co">#&gt;  8 id1   2020-0… team2 pre   honos   Scale 8: Other me… Severe to… Type A… &lt;NA&gt; </span>
+<span class="co">#&gt;  9 id1   2020-0… team2 pre   honos   Scale 9: Relation… Mild prob… &lt;NA&gt;    &lt;NA&gt; </span>
+<span class="co">#&gt; 10 id1   2020-0… team2 pre   honos   Scale 10: Activit… Moderatel… &lt;NA&gt;    &lt;NA&gt; </span>
+<span class="co">#&gt; # … with 314 more rows</span></code></pre></div>
 </div>
   </div>
 

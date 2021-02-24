@@ -45,7 +45,6 @@ honos_data %>%
 There are two options to create a long data set:
 
 1. Create a long data set that includes item 8 problem description and additional specification variables `pivot = "all_items"`
-1. Create a long data set with that includes only scores in long format  `pivot = "item_scores"`
 
 ```{r}
 
@@ -61,7 +60,7 @@ honos_long
 
 ```
 
-
+2. Create a long data set with that includes only scores in long format  `pivot = "item_scores"`
 
 ```{r}
 

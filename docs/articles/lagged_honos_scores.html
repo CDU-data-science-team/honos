@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">honos</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9001</span>
       </span>
     </div>
 
@@ -100,33 +100,38 @@
 <li>
 <code><a href="../reference/calc_change_label.html">calc_change_label()</a></code>: Creates change labels for repeated measures of the HoNOS. This is an optional argument in the <code><a href="../reference/lag_honos.html">lag_honos()</a></code> function or can be used separately</li>
 </ul>
+<p>It is slightly confusing to see the two variables <code>honos_i8_prob</code> and <code>honos_i8_spec</code> repeated in long format for all 18 items. This is because the information in these two variables cant be used when calculating lagged change scores, but these values are associated with entire assessment of a particular individual. The current implementation allows to filter for all HoNOS assessments with a specified problem in variable <code>honos_i8_prob</code> using the <code><a href="https://dplyr.tidyverse.org/reference/filter.html">dplyr::filter()</a></code> function for example. This may be useful in cases when it is preferred to only perform analyses for a specified subgroup of individuals, oh highlight different subgroups when plotting the data (e.g., by using the aesthetic <code>colour = prob_var_item8</code> when using the <code>ggplot2</code> package for visualising the data).</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">honos</span><span class="op">)</span>
-<span class="co">#&gt; This is honos 0.1.1</span>
-<span class="co">#&gt; honos is currently in development -function names and arguments might change.</span>
-<span class="co">#&gt; PLEASE REPORT ANY BUGS!</span>
+<span class="co">#&gt; This is honos 0.1.1.9001</span>
+<span class="co">#&gt; honos is currently in development - function names and arguments might change.</span>
+<span class="co">#&gt; PLEASE REPORT ANY BUGS OR IDEAS!</span>
 
-<span class="va">honos_wide</span> <span class="op">%&gt;%</span> 
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>client_id <span class="op">=</span> <span class="va">id</span>, assessment_date <span class="op">=</span> <span class="va">date</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">honos</span><span class="fu">::</span><span class="fu"><a href="../reference/lag_honos.html">lag_honos</a></span><span class="op">(</span>id_var <span class="op">=</span> <span class="va">client_id</span>, 
-                   date_var <span class="op">=</span> <span class="va">assessment_date</span>, 
-                   change_label <span class="op">=</span> <span class="st">"deterio_improve"</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 26,000 x 10</span>
-<span class="co">#&gt;    client_id assessment_date measure lag1assessment_… item  honos lag1honos</span>
-<span class="co">#&gt;    &lt;fct&gt;     &lt;date&gt;          &lt;chr&gt;   &lt;date&gt;           &lt;fct&gt; &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 id1       2015-10-31      honos   2009-09-23       1        NA         2</span>
-<span class="co">#&gt;  2 id1       2015-10-31      honos   2009-09-23       6         4         1</span>
-<span class="co">#&gt;  3 id1       2015-10-31      honos   2009-09-23       7         2         4</span>
-<span class="co">#&gt;  4 id1       2015-10-31      honos   2009-09-23       8         4         1</span>
-<span class="co">#&gt;  5 id1       2015-10-31      honos   2009-09-23       9         1         0</span>
-<span class="co">#&gt;  6 id1       2015-10-31      honos   2009-09-23       10        0         4</span>
-<span class="co">#&gt;  7 id1       2015-10-31      honos   2009-09-23       11        4         0</span>
-<span class="co">#&gt;  8 id1       2015-10-31      honos   2009-09-23       12        4         1</span>
-<span class="co">#&gt;  9 id1       2015-10-31      honos   2009-09-23       13        4         0</span>
-<span class="co">#&gt; 10 id1       2015-10-31      honos   2009-09-23       2         4         3</span>
-<span class="co">#&gt; # … with 25,990 more rows, and 3 more variables: honos_change &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   honos_date_diff &lt;drtn&gt;, honos_change_label &lt;fct&gt;</span></code></pre></div>
+<span class="va">honos_data</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/lag_honos.html">lag_honos</a></span><span class="op">(</span>id_var <span class="op">=</span> <span class="va">id</span>, 
+            date_var <span class="op">=</span> <span class="va">date</span>,
+            value_vars_current <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"q1"</span>, <span class="st">"q2"</span>, <span class="st">"q3"</span>, <span class="st">"q4"</span>, <span class="st">"q5"</span>, <span class="st">"q6"</span>, <span class="st">"q7"</span>, 
+                                   <span class="st">"q8"</span>, <span class="st">"q9"</span>, <span class="st">"q10"</span>, <span class="st">"q11"</span>, <span class="st">"q12"</span>, <span class="st">"q13"</span><span class="op">)</span>,
+            prob_var_item8 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"q8_prob"</span><span class="op">)</span>,
+            spec_var_item8 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"q8_spec"</span><span class="op">)</span>,
+            value_vars_history <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"qa"</span>, <span class="st">"qb"</span>, <span class="st">"qc"</span>, <span class="st">"qd"</span>, <span class="st">"qe"</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 234 x 14</span>
+<span class="co">#&gt;    id    date       team  stage honos_i8_prob honos_i8_spec lag1date    item</span>
+<span class="co">#&gt;    &lt;chr&gt; &lt;date&gt;     &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;         &lt;chr&gt;         &lt;date&gt;     &lt;dbl&gt;</span>
+<span class="co">#&gt;  1 id1   2020-02-11 team1 pre   A             &lt;NA&gt;          2020-01-01     1</span>
+<span class="co">#&gt;  2 id1   2020-02-11 team1 pre   A             &lt;NA&gt;          2020-01-01     2</span>
+<span class="co">#&gt;  3 id1   2020-02-11 team1 pre   A             &lt;NA&gt;          2020-01-01     3</span>
+<span class="co">#&gt;  4 id1   2020-02-11 team1 pre   A             &lt;NA&gt;          2020-01-01     4</span>
+<span class="co">#&gt;  5 id1   2020-02-11 team1 pre   A             &lt;NA&gt;          2020-01-01     5</span>
+<span class="co">#&gt;  6 id1   2020-02-11 team1 pre   A             &lt;NA&gt;          2020-01-01     6</span>
+<span class="co">#&gt;  7 id1   2020-02-11 team1 pre   A             &lt;NA&gt;          2020-01-01     7</span>
+<span class="co">#&gt;  8 id1   2020-02-11 team1 pre   A             &lt;NA&gt;          2020-01-01     8</span>
+<span class="co">#&gt;  9 id1   2020-02-11 team1 pre   A             &lt;NA&gt;          2020-01-01     9</span>
+<span class="co">#&gt; 10 id1   2020-02-11 team1 pre   A             &lt;NA&gt;          2020-01-01    10</span>
+<span class="co">#&gt; # … with 224 more rows, and 6 more variables: type &lt;chr&gt;, honos_value &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   lag1honos_value &lt;dbl&gt;, honos_change &lt;dbl&gt;, honos_date_diff &lt;drtn&gt;,</span>
+<span class="co">#&gt; #   honos_change_label &lt;fct&gt;</span></code></pre></div>
 </div>
   </div>
 

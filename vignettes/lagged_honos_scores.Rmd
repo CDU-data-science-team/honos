@@ -23,7 +23,7 @@ options(rmarkdown.html_vignette.check_title = FALSE)
 
 It is slightly confusing to see the two variables `honos_i8_prob` and `honos_i8_spec` repeated in long format for all 18 items.
 This is because the information in these two variables cant be used when calculating lagged change scores, but these values are associated with entire assessment of a particular individual.
-The current implementation allows to filter for all HoNOS assessments with a specified problem in variable `honos_i8_prob` using the `filter()` function from the `dplyr` package for example.
+The current implementation allows to filter for all HoNOS assessments with a specified problem in variable `honos_i8_prob` using the `dplyr::filter()` function for example.
 This may be useful in cases when it is preferred to only perform analyses for a specified subgroup of individuals, oh highlight different subgroups when plotting the data (e.g., by using the aesthetic `colour = prob_var_item8` when using the `ggplot2` package for visualising the data).
 
 ```{r}

@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">honos</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9001</span>
       </span>
     </div>
 
@@ -93,9 +93,9 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">honos</span><span class="op">)</span>
-<span class="co">#&gt; This is honos 0.1.1</span>
-<span class="co">#&gt; honos is currently in development -function names and arguments might change.</span>
-<span class="co">#&gt; PLEASE REPORT ANY BUGS!</span></code></pre></div>
+<span class="co">#&gt; This is honos 0.1.1.9001</span>
+<span class="co">#&gt; honos is currently in development - function names and arguments might change.</span>
+<span class="co">#&gt; PLEASE REPORT ANY BUGS OR IDEAS!</span></code></pre></div>
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
@@ -109,6 +109,14 @@
 <a href="#return-long-format" class="anchor"></a>Return long format</h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
+<span class="va">honos_long</span> <span class="op">&lt;-</span> <span class="va">honos_data</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/pivot_honos_longer.html">pivot_honos_longer</a></span><span class="op">(</span>value_vars_current <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"q1"</span>, <span class="st">"q2"</span>, <span class="st">"q3"</span>, <span class="st">"q4"</span>, <span class="st">"q5"</span>, <span class="st">"q6"</span>, <span class="st">"q7"</span>, 
+                                            <span class="st">"q8"</span>, <span class="st">"q9"</span>, <span class="st">"q10"</span>, <span class="st">"q11"</span>, <span class="st">"q12"</span>, <span class="st">"q13"</span><span class="op">)</span>,
+                     prob_var_item8 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"q8_prob"</span><span class="op">)</span>,
+                     spec_var_item8 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"q8_spec"</span><span class="op">)</span>,
+                     value_vars_history <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"qa"</span>, <span class="st">"qb"</span>, <span class="st">"qc"</span>, <span class="st">"qd"</span>, <span class="st">"qe"</span><span class="op">)</span>, 
+                     pivot <span class="op">=</span> <span class="st">"item_scores"</span><span class="op">)</span>
+
 <span class="va">honos_long</span> <span class="op">%&gt;%</span> 
   <span class="fu">honos</span><span class="fu">::</span><span class="fu"><a href="../reference/calc_subscales.html">calc_subscales</a></span><span class="op">(</span>id_var <span class="op">=</span> <span class="va">id</span>, 
                         date_var <span class="op">=</span> <span class="va">date</span>, 
@@ -117,20 +125,20 @@
                         return_format <span class="op">=</span> <span class="st">"long"</span>, 
                         return_items <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; Note: This is using the subscales as identified in ... TODO ADD REFERNCE (YEAR).</span>
-<span class="co">#&gt; # A tibble: 39,000 x 7</span>
-<span class="co">#&gt;    id    date       measure item  value honos_subscale honos_subscale_value</span>
-<span class="co">#&gt;    &lt;fct&gt; &lt;date&gt;     &lt;chr&gt;   &lt;fct&gt; &lt;dbl&gt; &lt;chr&gt;                         &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 id1   2018-08-05 honos   1         2 behaviour                         8</span>
-<span class="co">#&gt;  2 id1   2018-08-05 honos   2         4 behaviour                         8</span>
-<span class="co">#&gt;  3 id1   2018-08-05 honos   3         2 behaviour                         8</span>
-<span class="co">#&gt;  4 id1   2018-08-05 honos   4         3 impairment                        5</span>
-<span class="co">#&gt;  5 id1   2018-08-05 honos   5         2 impairment                        5</span>
-<span class="co">#&gt;  6 id1   2018-08-05 honos   6        NA symptom                          NA</span>
-<span class="co">#&gt;  7 id1   2018-08-05 honos   7         1 symptom                          NA</span>
-<span class="co">#&gt;  8 id1   2018-08-05 honos   8         0 symptom                          NA</span>
-<span class="co">#&gt;  9 id1   2018-08-05 honos   9         1 social                            9</span>
-<span class="co">#&gt; 10 id1   2018-08-05 honos   10        3 social                            9</span>
-<span class="co">#&gt; # … with 38,990 more rows</span></code></pre></div>
+<span class="co">#&gt; # A tibble: 324 x 11</span>
+<span class="co">#&gt;    id    date  team  stage measure  item value prob  spec  honos_subscale</span>
+<span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;         </span>
+<span class="co">#&gt;  1 id1   2020… team2 pre   honos       1     1 &lt;NA&gt;  &lt;NA&gt;  behaviour     </span>
+<span class="co">#&gt;  2 id1   2020… team2 pre   honos       2     2 &lt;NA&gt;  &lt;NA&gt;  behaviour     </span>
+<span class="co">#&gt;  3 id1   2020… team2 pre   honos       3     4 &lt;NA&gt;  &lt;NA&gt;  behaviour     </span>
+<span class="co">#&gt;  4 id1   2020… team2 pre   honos       4     2 &lt;NA&gt;  &lt;NA&gt;  impairment    </span>
+<span class="co">#&gt;  5 id1   2020… team2 pre   honos       5     2 &lt;NA&gt;  &lt;NA&gt;  impairment    </span>
+<span class="co">#&gt;  6 id1   2020… team2 pre   honos       6     4 &lt;NA&gt;  &lt;NA&gt;  symptom       </span>
+<span class="co">#&gt;  7 id1   2020… team2 pre   honos       7     3 &lt;NA&gt;  &lt;NA&gt;  symptom       </span>
+<span class="co">#&gt;  8 id1   2020… team2 pre   honos       8     4 A     &lt;NA&gt;  symptom       </span>
+<span class="co">#&gt;  9 id1   2020… team2 pre   honos       9     2 &lt;NA&gt;  &lt;NA&gt;  social        </span>
+<span class="co">#&gt; 10 id1   2020… team2 pre   honos      10     3 &lt;NA&gt;  &lt;NA&gt;  social        </span>
+<span class="co">#&gt; # … with 314 more rows, and 1 more variable: honos_subscale_value &lt;dbl&gt;</span></code></pre></div>
 </div>
 <div id="return-wide-format" class="section level3">
 <h3 class="hasAnchor">
@@ -145,20 +153,32 @@
                         return_format <span class="op">=</span> <span class="st">"wide"</span>, 
                         return_items <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="co">#&gt; Note: This is using the subscales as identified in ... TODO ADD REFERNCE (YEAR).</span>
-<span class="co">#&gt; # A tibble: 3,000 x 7</span>
-<span class="co">#&gt;    id    date       measure honos_behaviour honos_impairment honos_symptom</span>
-<span class="co">#&gt;    &lt;fct&gt; &lt;date&gt;     &lt;chr&gt;             &lt;dbl&gt;            &lt;dbl&gt;         &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 id1   2018-08-05 honos                 8                5            NA</span>
-<span class="co">#&gt;  2 id1   2015-10-31 honos                NA                5             8</span>
-<span class="co">#&gt;  3 id1   2009-09-23 honos                 7                1             5</span>
-<span class="co">#&gt;  4 id2   2019-06-13 honos                 4                3             8</span>
-<span class="co">#&gt;  5 id2   2019-06-10 honos                 6                3             7</span>
-<span class="co">#&gt;  6 id2   2003-08-06 honos                 6               NA             8</span>
-<span class="co">#&gt;  7 id3   2019-12-17 honos                 9                6            10</span>
-<span class="co">#&gt;  8 id3   2016-04-17 honos                 1               NA            12</span>
-<span class="co">#&gt;  9 id3   2010-02-13 honos                NA                4             4</span>
-<span class="co">#&gt; 10 id4   2019-05-01 honos                 9                8            11</span>
-<span class="co">#&gt; # … with 2,990 more rows, and 1 more variable: honos_social &lt;dbl&gt;</span></code></pre></div>
+<span class="co">#&gt; Warning: Values are not uniquely identified; output will contain list-cols.</span>
+<span class="co">#&gt; * Use `values_fn = list` to suppress this warning.</span>
+<span class="co">#&gt; * Use `values_fn = length` to identify where the duplicates arise</span>
+<span class="co">#&gt; * Use `values_fn = {summary_fun}` to summarise duplicates</span>
+<span class="co">#&gt; # A tibble: 18 x 7</span>
+<span class="co">#&gt;    id    date  measure honos_behaviour honos_impairment honos_symptom</span>
+<span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;list&gt;          &lt;list&gt;           &lt;list&gt;       </span>
+<span class="co">#&gt;  1 id1   2020… honos   &lt;dbl [1]&gt;       &lt;dbl [1]&gt;        &lt;dbl [2]&gt;    </span>
+<span class="co">#&gt;  2 id1   2020… honos   &lt;dbl [1]&gt;       &lt;dbl [1]&gt;        &lt;dbl [2]&gt;    </span>
+<span class="co">#&gt;  3 id1   2020… honos   &lt;dbl [1]&gt;       &lt;dbl [1]&gt;        &lt;dbl [2]&gt;    </span>
+<span class="co">#&gt;  4 id1   2020… honos   &lt;dbl [1]&gt;       &lt;dbl [1]&gt;        &lt;dbl [2]&gt;    </span>
+<span class="co">#&gt;  5 id2   2020… honos   &lt;dbl [1]&gt;       &lt;dbl [1]&gt;        &lt;dbl [2]&gt;    </span>
+<span class="co">#&gt;  6 id2   2020… honos   &lt;dbl [1]&gt;       &lt;dbl [1]&gt;        &lt;dbl [2]&gt;    </span>
+<span class="co">#&gt;  7 id3   2019… honos   &lt;dbl [1]&gt;       &lt;dbl [1]&gt;        &lt;dbl [2]&gt;    </span>
+<span class="co">#&gt;  8 id4   2021… honos   &lt;dbl [1]&gt;       &lt;dbl [1]&gt;        &lt;dbl [2]&gt;    </span>
+<span class="co">#&gt;  9 id4   2021… honos   &lt;dbl [1]&gt;       &lt;dbl [1]&gt;        &lt;dbl [2]&gt;    </span>
+<span class="co">#&gt; 10 id4   2021… honos   &lt;dbl [1]&gt;       &lt;dbl [1]&gt;        &lt;dbl [2]&gt;    </span>
+<span class="co">#&gt; 11 id4   2020… honos   &lt;dbl [1]&gt;       &lt;dbl [1]&gt;        &lt;dbl [2]&gt;    </span>
+<span class="co">#&gt; 12 id4   2020… honos   &lt;dbl [1]&gt;       &lt;dbl [1]&gt;        &lt;dbl [2]&gt;    </span>
+<span class="co">#&gt; 13 id4   2020… honos   &lt;dbl [1]&gt;       &lt;dbl [1]&gt;        &lt;dbl [2]&gt;    </span>
+<span class="co">#&gt; 14 id5   2020… honos   &lt;dbl [1]&gt;       &lt;dbl [1]&gt;        &lt;dbl [2]&gt;    </span>
+<span class="co">#&gt; 15 id5   2020… honos   &lt;dbl [1]&gt;       &lt;dbl [1]&gt;        &lt;dbl [2]&gt;    </span>
+<span class="co">#&gt; 16 id5   2020… honos   &lt;dbl [1]&gt;       &lt;dbl [1]&gt;        &lt;dbl [2]&gt;    </span>
+<span class="co">#&gt; 17 id5   2020… honos   &lt;dbl [1]&gt;       &lt;dbl [1]&gt;        &lt;dbl [2]&gt;    </span>
+<span class="co">#&gt; 18 id5   2020… honos   &lt;dbl [1]&gt;       &lt;dbl [1]&gt;        &lt;dbl [2]&gt;    </span>
+<span class="co">#&gt; # … with 1 more variable: honos_social &lt;list&gt;</span></code></pre></div>
 </div>
 </div>
 <div id="references" class="section level2 unnumbered">
