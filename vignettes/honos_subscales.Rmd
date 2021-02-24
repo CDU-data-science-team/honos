@@ -29,6 +29,14 @@ Review the psychometric literature on this topic, e.g., @Trauer1999
 
 ```{r}
 
+honos_long <- honos_data %>% 
+  pivot_honos_longer(value_vars_current = c("q1", "q2", "q3", "q4", "q5", "q6", "q7", 
+                                            "q8", "q9", "q10", "q11", "q12", "q13"),
+                     prob_var_item8 = c("q8_prob"),
+                     spec_var_item8 = c("q8_spec"),
+                     value_vars_history = c("qa", "qb", "qc", "qd", "qe"), 
+                     pivot = "item_scores")
+
 honos_long %>% 
   honos::calc_subscales(id_var = id, 
                         date_var = date, 

@@ -8,8 +8,13 @@ lag_honos(
   data,
   id_var,
   date_var,
+  value_vars_current,
+  prob_var_item8,
+  spec_var_item8,
+  value_vars_history,
   add_change_label = TRUE,
-  change_label = c("high_low", "deterio_improve")
+  change_label = c("high_low", "deterio_improve"),
+  honos_version = c("working_adults")
 )
 }
 \arguments{
@@ -19,9 +24,19 @@ lag_honos(
 
 \item{date_var}{Name of date (or datetime) variable}
 
+\item{value_vars_current}{Vector, specifying variable names with values for 'current' items}
+
+\item{prob_var_item8}{Vector, specifying variable name with description of problem (prob) for item 8}
+
+\item{spec_var_item8}{Vector, specifying variable name with problem specification (spec) of for item 8}
+
+\item{value_vars_history}{Vector, specifying specifying variable names with values for 'historic' items}
+
 \item{add_change_label}{Logical, specifying whether to add a variable that describes the change using the function \code{\link{calc_change_label}}}
 
 \item{change_label}{String, specifying whether to describe the change using "high_low" (e.g., HL stands for high to low) or "deterio_improve" (Deterioration, Unchanged, Improved)}
+
+\item{honos_version}{Vector, specifying version of the HoNOS that is being used. TODO IMPLEMENT MORE VERSIONS.}
 }
 \value{
 Dataframe with original data and lagged values

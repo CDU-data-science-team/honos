@@ -12,6 +12,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+
+options(rmarkdown.html_vignette.check_title = FALSE)
 ```
 
 ## Calculate lagged scores
@@ -19,14 +21,24 @@ knitr::opts_chunk$set(
 - `lag_honos()`: Calculate lagged scores based on a date variable and calculate change labels (e.g., "high to low", or 'deterioration')
 - `calc_change_label()`: Creates change labels for repeated measures of the HoNOS. This is an optional argument in the `lag_honos()` function or can be used separately
 
+It is slightly confusing to see the two variables `honos_i8_prob` and `honos_i8_spec` repeated in long format for all 18 items.
+This is because the information in these two variables cant be used when calculating lagged change scores, but these values are associated with entire assessment of a particular individual.
+The current implementation allows to filter for all HoNOS assessments with a specified problem in variable `honos_i8_prob` using the `filter()` function from the `dplyr` package for example.
+This may be useful in cases when it is preferred to only perform analyses for a specified subgroup of individuals, oh highlight different subgroups when plotting the data (e.g., by using the aesthetic `colour = prob_var_item8` when using the `ggplot2` package for visualising the data).
+
 ```{r}
 
 library(honos)
 
-honos_wide %>% 
-  dplyr::rename(client_id = id, assessment_date = date) %>% 
-  honos::lag_honos(id_var = client_id, 
-                   date_var = assessment_date, 
-                   change_label = "deterio_improve")
+honos_data %>% 
+  lag_honos(id_var = id, 
+            date_var = date,
+            value_vars_current = c("q1", "q2", "q3", "q4", "q5", "q6", "q7", 
+                                   "q8", "q9", "q10", "q11", "q12", "q13"),
+            prob_var_item8 = c("q8_prob"),
+            spec_var_item8 = c("q8_spec"),
+            value_vars_history = c("qa", "qb", "qc", "qd", "qe"))
 
 ```
+
+

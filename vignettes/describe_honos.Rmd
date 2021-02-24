@@ -19,40 +19,25 @@ knitr::opts_chunk$set(
 - `as_item_desc()`: Add item descriptions (For 13 and 18 item versions of the HoNOS)
  
 ```{r}
+
 library(honos)
 
-honos_long %>% 
-  dplyr::mutate(item_desc = as_item_desc(item, n_items = 13))
+honos_longish <- honos_data %>% 
+  pivot_honos_longer(value_vars_current = c("q1", "q2", "q3", "q4", "q5", "q6", "q7", 
+                                            "q8", "q9", "q10", "q11", "q12", "q13"),
+                     prob_var_item8 = c("q8_prob"),
+                     spec_var_item8 = c("q8_spec"),
+                     value_vars_history = c("qa", "qb", "qc", "qd", "qe"), 
+                     pivot = "item_scores")
 
 ```
-In item 8, the clinician can specify 10 different categories.
-The function `as_i8_desc()` can be used to add more detailed labels, for example:
-
-```{r}
-as_i8_desc("B")
-```
-
-
-## Describe HoNOS severity scores
-
-- `as_severity_desc()`: Add severity descriptions (Values '0' to '4')
-
-```{r}
-library(honos)
-
-honos_long %>% 
-  dplyr::mutate(value_desc = as_severity_desc(value, na_level = "I AM A MISSING VALUE"))
-
-```
-## Describe clusters
-
-- `as_cluster_desc()`: Describe clusters (Values: 0 to 21)
 
 ```{r}
 
-library(honos)
-x <- 0:21
-as_cluster_desc(x)
+# make use of all these description functions I wrote
+honos_longish %>% 
+  dplyr::mutate(item = as_item_desc(item)) %>% 
+  dplyr::mutate(prob = as_i8_desc(prob)) %>% 
+  dplyr::mutate(value = as_severity_desc(value))
 
 ```
-

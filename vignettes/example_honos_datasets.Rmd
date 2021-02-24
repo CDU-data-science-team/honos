@@ -16,20 +16,62 @@ knitr::opts_chunk$set(
 
 ## Datasets
 
-The package comes with a simulated datasets of HoNOS scores (13-items) that is available in "long" as well as "wide" format.
-
-#### Long format
-
-- `id`: Unique identifier 
-- `date`: Date variable
-- `measure`: Description of measure
-- `item`: Number of HoNOS item
-- `value`: HoNOS score
+The package comes with a simulated dataset of HoNOS scores in "wide" format.
+A helper function can be used to transform this data into "long" format (`pivot_honos_longer`).
 
 ```{r}
 library(honos)
 
-# Show fist 5 ids
+honos_data
+```
+
+Although the original variable names in `honos_data` are somewhat self-explanatory, they are not good! 
+Therefore this package also offers a function to rename the variables (`rename_honos()`) to be more consistent and allow for easier further data manipulation.
+
+```{r}
+
 honos_data %>% 
-  dplyr::filter(id %in% paste0("id", 1:5))
+  rename_honos(value_vars_current = c("q1", "q2", "q3", "q4", "q5", "q6", "q7", 
+                                      "q8", "q9", "q10", "q11", "q12", "q13"),
+               prob_var_item8 = c("q8_prob"),
+               spec_var_item8 = c("q8_spec"),
+               value_vars_history = c("qa", "qb", "qc", "qd", "qe"))
+
+```
+
+
+### Create long data set
+
+There are two options to create a long data set:
+
+1. Create a long data set that includes item 8 problem description and additional specification variables `pivot = "all_items"`
+1. Create a long data set with that includes only scores in long format  `pivot = "item_scores"`
+
+```{r}
+
+honos_long <- honos_data %>% 
+  pivot_honos_longer(value_vars_current = c("q1", "q2", "q3", "q4", "q5", "q6", "q7", 
+                                            "q8", "q9", "q10", "q11", "q12", "q13"),
+                     prob_var_item8 = c("q8_prob"),
+                     spec_var_item8 = c("q8_spec"),
+                     value_vars_history = c("qa", "qb", "qc", "qd", "qe"), 
+                     pivot = "all_items")
+
+honos_long
+
+```
+
+
+
+```{r}
+
+honos_longish <- honos_data %>% 
+  pivot_honos_longer(value_vars_current = c("q1", "q2", "q3", "q4", "q5", "q6", "q7", 
+                                            "q8", "q9", "q10", "q11", "q12", "q13"),
+                     prob_var_item8 = c("q8_prob"),
+                     spec_var_item8 = c("q8_spec"),
+                     value_vars_history = c("qa", "qb", "qc", "qd", "qe"), 
+                     pivot = "item_scores")
+
+honos_longish
 ```
