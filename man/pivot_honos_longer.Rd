@@ -37,3 +37,12 @@ THis functions transforms HoNOS data from wide (i.e., one row per assessment, on
 This data format is needed to perform common calculations and visualisations of HoNOS data in R.
 This function automatically replaces the value 9 with a missing value ('NA').
 }
+\examples{
+pivot_honos_longer(data = honos_data,
+                   value_vars_current = c("q1", "q2", "q3", "q4", "q5", "q6", "q7",
+                                          "q8", "q9", "q10", "q11", "q12", "q13"),
+                   prob_var_item8 = c("q8_prob"),
+                   spec_var_item8 = c("q8_spec"),
+                   value_vars_history = c("qa", "qb", "qc", "qd", "qe"),
+                   pivot = "all_items")
+}

@@ -21,7 +21,13 @@ Describe clusters
 }
 \examples{
 x <- 0:21
+# Return clusters (0 to 21)
 as_cluster_desc(x)
-as_cluster_desc(x, return = "super_cluster")
-as_cluster_desc(x, return = "super_cluster", super_cluster_details = TRUE)
+# Return super clusters (A to C)
+as_cluster_desc(x,
+                return = "super_cluster")
+# Return detailed super clusters
+as_cluster_desc(x,
+                return = "super_cluster",
+                super_cluster_details = TRUE)
 }

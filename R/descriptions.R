@@ -160,13 +160,18 @@ as_i8_desc <- function(x) {
 #'
 #' @examples
 #' x <- 0:21
+#' # Return clusters (0 to 21)
 #' as_cluster_desc(x)
-#' as_cluster_desc(x, return = "super_cluster")
-#' as_cluster_desc(x, return = "super_cluster", super_cluster_details = TRUE)
+#' # Return super clusters (A to C)
+#' as_cluster_desc(x,
+#'                 return = "super_cluster")
+#' # Return detailed super clusters
+#' as_cluster_desc(x,
+#'                 return = "super_cluster",
+#'                 super_cluster_details = TRUE)
 as_cluster_desc <- function(x, return = c("cluster", "super_cluster"), super_cluster_details = FALSE) {
 
   return <- match.arg(return)
-
 
   if (return == "cluster") {
 
@@ -217,7 +222,7 @@ as_cluster_desc <- function(x, return = c("cluster", "super_cluster"), super_clu
     } else if (super_cluster_details == TRUE) {
 
       x <- dplyr::case_when(x == 0 ~ NA_character_,
-                            x %in% 1:4 ~   "A: Non-psycotic (Very severe and complex",
+                            x %in% 1:4 ~   "A: Non-psycotic (Very severe and complex)",
                             x %in% 5:8 ~   "A: Non-psycotic (Mild, moderate, or severe)",
                             x == 9 ~       "A: Non-psycotic (Blank place marker)",
                             x == 10 ~      "B: Psychosis (First episode)",
@@ -230,7 +235,7 @@ as_cluster_desc <- function(x, return = c("cluster", "super_cluster"), super_clu
 
       x <- factor(x,
                   levels = c("A: Non-psycotic (Blank place marker)",
-                             "A: Non-psycotic (Very severe and complex",
+                             "A: Non-psycotic (Very severe and complex)",
                              "A: Non-psycotic (Mild, moderate, or severe)",
                              "B: Psychosis (First episode)",
                              "B: Psychosis (Ongoing or recurrent)",
@@ -238,7 +243,7 @@ as_cluster_desc <- function(x, return = c("cluster", "super_cluster"), super_clu
                              "B: Psychosis (Very severe engagement)",
                              "C: Organic (Cognitive impairment)"),
                   labels = c("A: Non-psycotic (Blank place marker)",
-                             "A: Non-psycotic (Very severe and complex",
+                             "A: Non-psycotic (Very severe and complex)",
                              "A: Non-psycotic (Mild, moderate, or severe)",
                              "B: Psychosis (First episode)",
                              "B: Psychosis (Ongoing or recurrent)",
@@ -248,13 +253,8 @@ as_cluster_desc <- function(x, return = c("cluster", "super_cluster"), super_clu
                   )
     }
 
-
-
   }
 
   return(x)
-
-
-
 
 }

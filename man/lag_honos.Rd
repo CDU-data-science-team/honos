@@ -45,8 +45,12 @@ Dataframe with original data and lagged values
 Calculate lagged HoNOS scores
 }
 \examples{
-lag_honos(data = honos_wide,
+lag_honos(data = honos_data,
           id_var = id,
           date_var = date,
-          change_label = "deterio_improve")
+          value_vars_current = c("q1", "q2", "q3", "q4", "q5", "q6", "q7",
+                                 "q8", "q9", "q10", "q11", "q12", "q13"),
+          prob_var_item8 = c("q8_prob"),
+          spec_var_item8 = c("q8_spec"),
+          value_vars_history = c("qa", "qb", "qc", "qd", "qe"))
 }
