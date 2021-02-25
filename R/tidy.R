@@ -74,8 +74,4 @@ pivot_honos_longer <- function(data, value_vars_current, prob_var_item8,
 
   }
 
-
-
-
-
 }
