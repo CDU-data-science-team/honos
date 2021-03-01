@@ -17,13 +17,14 @@
 #'
 #' @examples
 #' pivot_honos_longer(data = honos_data,
+#'                    id_var = id,
 #'                    value_vars_current = c("q1", "q2", "q3", "q4", "q5", "q6", "q7",
 #'                                           "q8", "q9", "q10", "q11", "q12", "q13"),
 #'                    prob_var_item8 = c("q8_prob"),
 #'                    spec_var_item8 = c("q8_spec"),
 #'                    value_vars_history = c("qa", "qb", "qc", "qd", "qe"),
 #'                    pivot = "all_items")
-pivot_honos_longer <- function(data, value_vars_current, prob_var_item8,
+pivot_honos_longer <- function(data, id_var, value_vars_current, prob_var_item8,
                                spec_var_item8, value_vars_history,
                                honos_version = c("working_adults"),
                                pivot = c("all_items", "item_scores")) {
@@ -47,15 +48,14 @@ pivot_honos_longer <- function(data, value_vars_current, prob_var_item8,
                                       honos_version = honos_version,
                                       .return_new_var_names = TRUE)
 
+
   # nor make data long, first need to make sure all values are same type, I dont really like this
   honos_long <- honos_renamed %>%
     dplyr::mutate_if(is.double, as.character) %>%
     tidyr::pivot_longer(cols = dplyr::all_of(honos_new_var_names),
                         names_sep = "_",
                         names_to = c("measure", "item", "type")) %>%
-    dplyr::mutate(item = as.numeric(stringr::str_extract(item, "\\d+")),
-                  value = dplyr::na_if(value, 9)) %>%
-    dplyr::arrange(id, dplyr::desc(date), item)
+    dplyr::mutate(item = as.numeric(stringr::str_extract(item, "\\d+")))
 
   if (pivot == "all_items") {
 
@@ -69,8 +69,7 @@ pivot_honos_longer <- function(data, value_vars_current, prob_var_item8,
     honos_long %>%
       tidyr::pivot_wider(names_from = type,
                          values_from = value) %>%
-      dplyr::mutate(value = as.numeric(value)) %>%
-      dplyr::arrange(id, dplyr::desc(date), item)
+      dplyr::mutate(value = as.numeric(value))
 
   }
 
