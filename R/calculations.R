@@ -217,3 +217,86 @@ calc_subscales <- function(data, id_var, date_var, item_var, value_var, return_f
   }
 
 }
+
+
+
+#' Calculate time since last HoNOS item scoring 3 or 4 (12-item version)
+#'
+#' @param data Data in long format
+#' @param id_var Name of variable that uniquely identifies each individual
+#' @param date_var Name of date (or datetime) variable
+#' @param item_var Name of variable specifying item numbers
+#' @param value_var Name of variable with HoNOS scores
+#' @param return_format String, specifying whether to return data in long (i.e., TODO) or wide (i.e., TODO) format
+#' @param return_items Logical, specifying whether to include individual item scores. NOTE: CURRENTLY NOT SUPPORTED.
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#' # First create long data set
+#' honos_longish <- honos_data %>%
+#'   pivot_honos_longer(value_vars_current = c("q1", "q2", "q3", "q4", "q5", "q6", "q7",
+#'                                             "q8", "q9", "q10", "q11", "q12", "q13"),
+#'                      prob_var_item8 = c("q8_prob"),
+#'                      spec_var_item8 = c("q8_spec"),
+#'                      value_vars_history = c("qa", "qb", "qc", "qd", "qe"),
+#'                      pivot = "item_scores")
+#' # Then calculate subscales based on individual item scores
+#' honos_longish %>%
+#'   calc_subscales(id_var = id,
+#'                  date_var = date,
+#'                  item_var = item,
+#'                  value_var = value,
+#'                  return_format = "long",
+#'                  return_items = TRUE)
+calc_timesince <- function(data, id_var, date_var, item_var, value_var, return_format = c("long", "wide"), return_items = FALSE) {
+
+  return_format <- match.arg(return_format)
+
+  data_temp <- data %>%
+    dplyr::filter({{ value_var }} == 3:4) %>%
+    dplyr::arrange(desc({{ date_var }})) %>%
+    dplyr::group_by({{ id_var }}, {{ item_var }}) %>%
+    dplyr::slice(1) %>%
+    dplyr::ungroup()
+
+  data_sys_time <- lubridate::floor_date(as.POSIXct(format(Sys.time()), tz = "UTC"), 'day')
+
+  data_temp <- data_temp %>%
+    dplyr::mutate(days_since_high_item_value = round(as.numeric(difftime(data_sys_time, {{ date_var }}, units = c("days"))), 0)) %>%
+    dplyr::select({{ id_var }}, {{ item_var }}, days_since_high_item_value)
+
+  if (return_format == "long") {
+
+    if (return_items == TRUE) {
+
+      return(data_temp)
+
+    } else if (return_items == FALSE) {
+
+      return(data_temp)
+
+    }
+
+  } else if (return_format == "wide") {
+
+    if (return_items == TRUE) {
+
+      stop("This option is currently not supported.", call. = FALSE)
+
+    } else if (return_items == FALSE) {
+
+      data_temp <- data_temp %>%
+        tidyr::pivot_wider(id_cols = c("id"),
+                           names_prefix = "time_since_",
+                           names_from = {{ item_var }},
+                           values_from = days_since_high_item_value)
+
+      return(data_temp)
+
+    }
+
+  }
+
+}
