@@ -17,7 +17,7 @@
 #'              spec_var_item8 = c("q8_spec"),
 #'              value_vars_history = c("qa", "qb", "qc", "qd", "qe")
 #'              )
-rename_honos <- function(data, value_vars_current, prob_var_item8, spec_var_item8, value_vars_history, honos_version = c("working_adults"), .return_new_var_names = FALSE) {
+rename_honos <- function(data, value_vars_current, prob_var_item8, spec_var_item8, value_vars_history, descriptive_names = TRUE, honos_version = c("working_adults"), .return_new_var_names = FALSE) {
 
   honos_version <- match.arg(honos_version)
 
@@ -58,14 +58,39 @@ rename_honos <- function(data, value_vars_current, prob_var_item8, spec_var_item
   }
 
 
+  if (descriptive_names = FALSE) {
   # Create vector of consistent variable names for honos 13 item version
   # TODO this needs to be changed for other versions of the honos
+  # TODO I might need to add a check here to make sure that none of these new variables names already exist in the data sets specified in 'data'
+
   honos_scales_new_names <- c(paste0("honos", "_", "i", 1:8, "_value"),
                               c("honos_i8_prob", "honos_i8_spec"),
                               paste0("honos", "_", "i", 9:13, "_value"),
                               paste0("honos", "_", "i", 14:18, "_value"))
+  } else {
 
-  # TODO I might need to add a check here to make sure that none of these new variables names already exist in the data sets specified in 'data'
+  honos_scales_new_names <- c("overactive",
+                              "selfharm",
+                              "substance",
+                              "cognitive",
+                              "physical",
+                              "psychotic",
+                              "depression",
+                              "other",
+                              "other_spec",
+                              "relationships",
+                              "adls",
+                              "housing",
+                              "activities",
+                              "overvalued",
+                              "historic_agitation",
+                              "historic_selfharm",
+                              "historic_safeguarding",
+                              "historic_engagement",
+                              "historic_vulnerability"
+  )
+
+  }
 
 
   if (.return_new_var_names == TRUE) {
