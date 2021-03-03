@@ -1,6 +1,7 @@
 #' Convert HoNOS severity scores to labelled factor
 #'
 #' @param x Vector of severity rating from 0 to 4
+#' @param short_labels Logical, specifying whether to return short or long descriptions
 #' @param na_level String, specifying label for missing values.
 #'
 #' @return Labelled "factor"
@@ -9,16 +10,30 @@
 #' @examples
 #' x <- 0:4
 #' as_severity_desc(x)
-as_severity_desc <- function(x, na_level = NULL) {
+as_severity_desc <- function(x, short_labels = TRUE, na_level = NULL) {
+
+  # define labels here, short or long
+  if (short_labels == TRUE) {
+
+    use_labels <- c("No problem",
+                    "Minor",
+                    "Mild",
+                    "Moderately/Severe",
+                    "Severe/Very severe")
+
+  } else {
+
+    use_labels <- c("No problem",
+                    "Minor problem",
+                    "Mild problem",
+                    "Moderately severe problem",
+                    "Severe to very severe problem")
+
+  }
 
   x <- factor(x,
               levels = c(0:4),
-              labels = c("No problem",
-                         "Minor problem",
-                         "Mild problem",
-                         "Moderately severe problem",
-                         "Severe to very severe problem")
-  )
+              labels = use_labels)
 
   if (is.null(na_level) == FALSE) {
 

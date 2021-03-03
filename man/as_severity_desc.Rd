@@ -4,10 +4,12 @@
 \alias{as_severity_desc}
 \title{Convert HoNOS severity scores to labelled factor}
 \usage{
-as_severity_desc(x, na_level = NULL)
+as_severity_desc(x, short_labels = TRUE, na_level = NULL)
 }
 \arguments{
 \item{x}{Vector of severity rating from 0 to 4}
+
+\item{short_labels}{Logical, specifying whether to return short or long descriptions}
 
 \item{na_level}{String, specifying label for missing values.}
 }

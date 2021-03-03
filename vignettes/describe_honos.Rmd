@@ -43,3 +43,16 @@ honos_longish %>%
   dplyr::mutate(value = as_severity_desc(value))
 
 ```
+
+## Compare short and long labels
+
+```{r}
+honos_longish %>% 
+  dplyr::mutate(value = as_severity_desc(value, short_labels = TRUE))
+```
+
+```{r}
+honos_longish %>% 
+  dplyr::mutate(value = as_severity_desc(value, short_labels = FALSE))
+```
+
