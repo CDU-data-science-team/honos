@@ -48,7 +48,7 @@ as_item_desc <- function(x, .ignore_n_items = FALSE) {
   n_items <- max(x, na.rm = TRUE)
 
   # ADD max number of items for each implemented HoNOS versions here
-  n_items_available <- c(13, 18)
+  n_items_available <- c(12, 13, 18)
 
   if (.ignore_n_items == FALSE) {
 
@@ -64,7 +64,28 @@ as_item_desc <- function(x, .ignore_n_items = FALSE) {
   }
 
   # CURRENT
-  if (n_items == 13) {
+  if (n_items == 12) {
+
+    x <- factor(x,
+                levels = c(1:12),
+                labels = c(
+                  "Scale 1: Overactive, aggressive, disruptive or agitated behaviour",
+                  "Scale 2: Non-accidental self-injury",
+                  "Scale 3: Problem drinking or drug taking",
+                  "Scale 4: Cognitive problems",
+                  "Scale 5: Physical illness or disability problems",
+                  "Scale 6: Hallucinations and Delusions",
+                  "Scale 7: Depressed mood",
+                  "Scale 8: Other mental and behavioural problems",
+                  "Scale 9: Relationships",
+                  "Scale 10: Activities of daily living",
+                  "Scale 11: Living conditions",
+                  "Scale 12: Occupation & Activities"
+                )
+    )
+
+    # CURRENT
+  } else if (n_items == 13) {
 
     x <- factor(x,
                 levels = c(1:13),
@@ -86,7 +107,7 @@ as_item_desc <- function(x, .ignore_n_items = FALSE) {
     )
 
     # CURRENT AND HISTORICAL
-  } else if (n_items == 18) {
+  } else {
 
     x <- factor(x,
                 levels = c(1:18),
