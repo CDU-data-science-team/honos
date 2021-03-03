@@ -28,7 +28,9 @@ honos_longish <- honos_data %>%
                      prob_var_item8 = c("q8_prob"),
                      spec_var_item8 = c("q8_spec"),
                      value_vars_history = c("qa", "qb", "qc", "qd", "qe"), 
-                     pivot = "item_scores")
+                     pivot = "item_scores") 
+
+honos_longish
 
 ```
 

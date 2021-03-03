@@ -30,13 +30,19 @@ Therefore this package also offers a function to rename the variables (`rename_h
 
 ```{r}
 
-honos_data %>% 
+honos_data_renamed <- honos_data %>% 
   rename_honos(value_vars_current = c("q1", "q2", "q3", "q4", "q5", "q6", "q7", 
                                       "q8", "q9", "q10", "q11", "q12", "q13"),
                prob_var_item8 = c("q8_prob"),
                spec_var_item8 = c("q8_spec"),
                value_vars_history = c("qa", "qb", "qc", "qd", "qe"))
 
+
+honos_data_renamed %>% 
+  rename_honos(value_vars_current = c(paste0("honos", "_", "i", 1:13, "_value")),
+               prob_var_item8 = c("honos_i8_prob"),
+               spec_var_item8 = c("honos_i8_spec"),
+               value_vars_history = paste0("honos", "_", "i", 14:18, "_value"))
 ```
 
 

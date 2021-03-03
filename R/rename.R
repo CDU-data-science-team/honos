@@ -65,7 +65,7 @@ rename_honos <- function(data, value_vars_current, prob_var_item8, spec_var_item
                               paste0("honos", "_", "i", 9:13, "_value"),
                               paste0("honos", "_", "i", 14:18, "_value"))
 
-  # TODO I might need to add a check here to make sure that none of these new variables names already exist in the data sets specified in 'data'
+  # TODO I might need to add more checks here to make sure that none of these new variables names already exist in the data sets specified in 'data'
 
 
   if (.return_new_var_names == TRUE) {
@@ -74,15 +74,22 @@ rename_honos <- function(data, value_vars_current, prob_var_item8, spec_var_item
 
   } else if (.return_new_var_names == FALSE) {
 
-    # create object for rename function
-    honos_scales_rename <- setNames(object = c(value_vars_current[1:8], prob_var_item8, spec_var_item8, value_vars_current[9:13], value_vars_history),
-                                    nm = honos_scales_new_names)
+    if (all(c(value_vars_current[1:8], prob_var_item8, spec_var_item8, value_vars_current[9:13], value_vars_history) %in% honos_scales_new_names)) {
 
-    # rename variables ...
-    data %>%
-      dplyr::rename(dplyr::all_of(honos_scales_rename))
+      message("The variable names specified in 'data' are already named appropriately.")
+
+      return(data)
+
+    } else {
+      # create object for rename function
+      honos_scales_rename <- setNames(object = c(value_vars_current[1:8], prob_var_item8, spec_var_item8, value_vars_current[9:13], value_vars_history),
+                                      nm = honos_scales_new_names)
+
+      # rename variables ...
+      data %>%
+        dplyr::rename(dplyr::all_of(honos_scales_rename))
+    }
 
   }
-
 
 }
