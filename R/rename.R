@@ -49,9 +49,22 @@ rename_honos <- function(data, value_vars_current, prob_var_item8, spec_var_item
     stop("Variable names must be unique.", call. = FALSE)
   }
 
-  # check that variables are present in data
+  # check that variables are present in data, also add sql functionality
 
-  if (all(c(value_vars_current, prob_var_item8, spec_var_item8, value_vars_history) %in% names(data)) == FALSE) {
+  if ("tbl_df" %in% class(data)) {
+
+    names_data <- names(data)
+
+  } else if ("tbl_sql" %in% class(data)) {
+
+    names_data <- names(data$ops$args$vars)
+
+  }
+
+
+
+
+  if (all(c(value_vars_current, prob_var_item8, spec_var_item8, value_vars_history) %in% names_data) == FALSE) {
 
     stop("Specified variables must be present in 'data'.", call. = FALSE)
 
