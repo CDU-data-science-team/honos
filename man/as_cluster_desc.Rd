@@ -7,11 +7,14 @@
 as_cluster_desc(
   x,
   return = c("cluster", "super_cluster"),
+  short_descriptions = TRUE,
   super_cluster_details = FALSE
 )
 }
 \arguments{
 \item{x}{Vector of numeric values ranging from 0 to 21}
+
+\item{short_descriptions}{Logical, specifying whether to return short or long descriptions}
 }
 \value{
 Labelled "factor"

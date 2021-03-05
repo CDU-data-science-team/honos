@@ -4,10 +4,12 @@
 \alias{as_i8_desc}
 \title{Convert HoNOS item 8 types to labelled factor}
 \usage{
-as_i8_desc(x)
+as_i8_desc(x, short_descriptions = TRUE)
 }
 \arguments{
 \item{x}{Vector of strings}
+
+\item{short_descriptions}{Logical, specifying whether to return short or long descriptions}
 }
 \value{
 Labelled "factor"
