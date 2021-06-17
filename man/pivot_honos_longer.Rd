@@ -6,6 +6,7 @@
 \usage{
 pivot_honos_longer(
   data,
+  id_var,
   value_vars_current,
   prob_var_item8,
   spec_var_item8,
@@ -39,6 +40,7 @@ This function automatically replaces the value 9 with a missing value ('NA').
 }
 \examples{
 pivot_honos_longer(data = honos_data,
+                   id_var = id,
                    value_vars_current = c("q1", "q2", "q3", "q4", "q5", "q6", "q7",
                                           "q8", "q9", "q10", "q11", "q12", "q13"),
                    prob_var_item8 = c("q8_prob"),

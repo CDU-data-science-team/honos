@@ -54,8 +54,39 @@ pivot_honos_longer <- function(data, id_var, value_vars_current, prob_var_item8,
     dplyr::mutate_if(is.double, as.character) %>%
     tidyr::pivot_longer(cols = dplyr::all_of(honos_new_var_names),
                         names_sep = "_",
-                        names_to = c("measure", "item", "type")) %>%
-    dplyr::mutate(item = as.numeric(stringr::str_extract(item, "\\d+")))
+                        names_to = c("measure", "item", "type"))
+
+
+  if ("tbl_sql" %in% class(data)) {
+
+    honos_long <- honos_long %>%
+      dplyr::mutate(item = dplyr::case_when(item %like% "honos_i1_value" ~ '1',
+                                            item %like% "honos_i2_value" ~ '2',
+                                            item %like% "honos_i3_value" ~ '3',
+                                            item %like% "honos_i4_value" ~ '4',
+                                            item %like% "honos_i5_value" ~ '5',
+                                            item %like% "honos_i6_value" ~ '6',
+                                            item %like% "honos_i7_value" ~ '7',
+                                            item %like% "honos_i8_value" ~ '8',
+                                            item %like% "honos_i9_value" ~ '9',
+                                            item %like% "honos_i10_value" ~ '10',
+                                            item %like% "honos_i11_value" ~ '11',
+                                            item %like% "honos_i12_value" ~ '12',
+                                            item %like% "honos_i13_value" ~ '13',
+                                            item %like% "honos_i14_value" ~ '14',
+                                            item %like% "honos_i15_value" ~ '15',
+                                            item %like% "honos_i16_value" ~ '16',
+                                            item %like% "honos_i17_value" ~ '17',
+                                            item %like% "honos_i18_value" ~ '18'),
+                    item = as.numeric(item))
+
+  } else if ("tbl_df" %in% class(data)) {
+
+    honos_long <- honos_long %>%
+      dplyr::mutate(item = as.numeric(stringr::str_extract(item, "\\d+")))
+
+  }
+
 
   if (pivot == "all_items") {
 
