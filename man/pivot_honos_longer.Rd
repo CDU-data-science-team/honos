@@ -6,6 +6,7 @@
 \usage{
 pivot_honos_longer(
   data,
+  id_var,
   value_vars_current,
   prob_var_item8,
   spec_var_item8,
