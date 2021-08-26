@@ -7,6 +7,7 @@
 as_cluster_desc(
   x,
   return = c("cluster", "super_cluster"),
+  cluster_details = FALSE,
   super_cluster_details = FALSE
 )
 }
