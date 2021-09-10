@@ -20,8 +20,8 @@ You can install the development version from
 [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("CDU-data-science-team/honos", build_vignettes = TRUE)
+# install.packages("remotes")
+remotes::install_github("CDU-data-science-team/honos", build_vignettes = TRUE)
 ```
 
 ## Functions
