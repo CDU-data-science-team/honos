@@ -62,11 +62,14 @@ rename_honos <- function(data, value_vars_current, prob_var_item8, spec_var_item
   }
 
 
+
+
   if (all(c(value_vars_current, prob_var_item8, spec_var_item8, value_vars_history) %in% names_data) == FALSE) {
 
     stop("Specified variables must be present in 'data'.", call. = FALSE)
 
   }
+
 
   # Create vector of consistent variable names for honos 13 item version
   # TODO this needs to be changed for other versions of the honos
@@ -76,6 +79,7 @@ rename_honos <- function(data, value_vars_current, prob_var_item8, spec_var_item
                               paste0("honos", "_", "i", 14:18, "_value"))
 
   # TODO I might need to add more checks here to make sure that none of these new variables names already exist in the data sets specified in 'data'
+
 
   if (.return_new_var_names == TRUE) {
 
@@ -98,5 +102,7 @@ rename_honos <- function(data, value_vars_current, prob_var_item8, spec_var_item
       data %>%
         dplyr::rename(dplyr::all_of(honos_scales_rename))
     }
+
   }
+
 }

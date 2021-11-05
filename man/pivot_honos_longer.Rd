@@ -6,12 +6,13 @@
 \usage{
 pivot_honos_longer(
   data,
+  id_var,
   value_vars_current,
   prob_var_item8,
   spec_var_item8,
   value_vars_history,
-  pivot = c("all_items", "item_scores"),
-  honos_version = c("working_adults")
+  honos_version = c("working_adults"),
+  pivot = c("all_items", "item_scores")
 )
 }
 \arguments{
@@ -25,9 +26,9 @@ pivot_honos_longer(
 
 \item{value_vars_history}{Vector, specifying specifying variable names with values for 'historic' items}
 
-\item{pivot}{String, specifying whether to include item 8 problem and item 8 specification in the long format ('all_items') or whether to only include all item scores in long format ("item_scores").}
-
 \item{honos_version}{Vector, specifying version of the HoNOS that is being used. TODO IMPLEMENT MORE VERSIONS.}
+
+\item{pivot}{String, specifying whether to include item 8 problem and item 8 specification in the long format ('all_items') or whether to only include all item scores in long format ("item_scores").}
 }
 \value{
 
@@ -42,8 +43,8 @@ pivot_honos_longer(data = honos_data,
                    id_var = id,
                    value_vars_current = c("q1", "q2", "q3", "q4", "q5", "q6", "q7",
                                           "q8", "q9", "q10", "q11", "q12", "q13"),
-                   prob_var_item8 = "q8_prob",
-                   spec_var_item8 = "q8_spec",
+                   prob_var_item8 = c("q8_prob"),
+                   spec_var_item8 = c("q8_spec"),
                    value_vars_history = c("qa", "qb", "qc", "qd", "qe"),
                    pivot = "all_items")
 }
