@@ -142,39 +142,80 @@ as_i8_desc <- function(x) {
 #' as_cluster_desc(x,
 #'                 return = "super_cluster",
 #'                 super_cluster_details = TRUE)
-as_cluster_desc <- function(x, return = c("cluster", "super_cluster"), super_cluster_details = FALSE) {
+as_cluster_desc <- function(x, return = c("cluster", "super_cluster"), cluster_details = FALSE, super_cluster_details = FALSE) {
 
   return <- match.arg(return)
 
   if (return == "cluster") {
 
-  x <- factor(x,
-              levels = c(0:21),
-              labels = c(
-                "Care Cluster 0: Variance",
-                "Care Cluster 1: Common mental health problems (Low severity)",
-                "Care Cluster 2: Common mental health problems (Low severity with greater need)",
-                "Care Cluster 3: Non-psychotic (Moderate severity)",
-                "Care Cluster 4: Non-psychotic (Severe)",
-                "Care Cluster 5: Non-psychotic disorders (Very severe)",
-                "Care Cluster 6: Non-psychotic disorder of over-valued ideas",
-                "Care Cluster 7: Enduring non-psychotic disorders (High disability)",
-                "Care Cluster 8: Non-psychotic chaotic and challenging disorders",
-                "Care Cluster 9: Blank cluster",
-                "Care Cluster 10: First episode psychosis (With / without manic features)",
-                "Care Cluster 11: Ongoing recurrent psychosis (Low symptoms)",
-                "Care Cluster 12: Ongoing or recurrent psychosis (High disability)",
-                "Care Cluster 13: Ongoing or recurrent psychosis (High symptom and disability)",
-                "Care Cluster 14: Psychotic crisis",
-                "Care Cluster 15: Severe psychotic depression",
-                "Care Cluster 16: Psychosis and affective disorder (High substance misuse and engagement)",
-                "Care Cluster 17: Psychosis and affective disorder – difficult to engage",
-                "Care Cluster 18: Cognitive impairment (Low need)",
-                "Care Cluster 19: Cognitive impairment or dementia complicated (Moderate need)",
-                "Care Cluster 20: Cognitive impairment or dementia complicated (High need)",
-                "Care Cluster 21: Cognitive impairment or dementia (High physical or engagement)"
-                )
-              )
+    if (cluster_details == TRUE) {
+
+      x <- factor(x,
+                  levels = c(0:21),
+                  labels = c(
+                    "Care Cluster 0: Variance",
+                    "Care Cluster 1: Common mental health problems (Low severity)",
+                    "Care Cluster 2: Common mental health problems (Low severity with greater need)",
+                    "Care Cluster 3: Non-psychotic (Moderate severity)",
+                    "Care Cluster 4: Non-psychotic (Severe)",
+                    "Care Cluster 5: Non-psychotic disorders (Very severe)",
+                    "Care Cluster 6: Non-psychotic disorder of over-valued ideas",
+                    "Care Cluster 7: Enduring non-psychotic disorders (High disability)",
+                    "Care Cluster 8: Non-psychotic chaotic and challenging disorders",
+                    "Care Cluster 9: Blank cluster",
+                    "Care Cluster 10: First episode psychosis (With / without manic features)",
+                    "Care Cluster 11: Ongoing recurrent psychosis (Low symptoms)",
+                    "Care Cluster 12: Ongoing or recurrent psychosis (High disability)",
+                    "Care Cluster 13: Ongoing or recurrent psychosis (High symptom and disability)",
+                    "Care Cluster 14: Psychotic crisis",
+                    "Care Cluster 15: Severe psychotic depression",
+                    "Care Cluster 16: Psychosis and affective disorder (High substance misuse and engagement)",
+                    "Care Cluster 17: Psychosis and affective disorder – difficult to engage",
+                    "Care Cluster 18: Cognitive impairment (Low need)",
+                    "Care Cluster 19: Cognitive impairment or dementia complicated (Moderate need)",
+                    "Care Cluster 20: Cognitive impairment or dementia complicated (High need)",
+                    "Care Cluster 21: Cognitive impairment or dementia (High physical or engagement)"
+                  )
+      )
+
+    }
+
+    if (cluster_details == FALSE) {
+
+      x <- factor(x,
+                  levels = c(0:21),
+                  labels = c(
+                    "0: Variance",
+                    "1: Common mental health problems (Low severity)",
+                    "2: Common mental health problems (Greater need)",
+                    "3: Non-psychotic (Moderate severity)",
+                    "4: Non-psychotic (Severe)",
+                    "5: Non-psychotic disorders (Very severe)",
+                    "6: Non-psychotic disorder of over-valued ideas",
+                    "7: Enduring non-psychotic disorders (High disab.)",
+                    "8: Non-psychotic chaotic and challenging disorders",
+                    "9: Blank cluster",
+                    "10: First episode psychosis",
+                    "11: Ongoing recurrent psychosis (Low sym.)",
+                    "12: Ongoing or recurrent psychosis (High disab.)",
+                    "13: Ongoing or recurrent psychosis (High sym. and disab.)",
+                    "14: Psychotic crisis",
+                    "15: Severe psychotic depression",
+                    "16: Psychosis and affective disorder (Substance misuse)",
+                    "17: Psychosis and affective disorder (Difficult to engage)",
+                    "18: Cognitive impairment (Low need)",
+                    "19: Cognitive impairment (Moderate)",
+                    "20: Cognitive impairment (High)",
+                    "21: Cognitive impairment (High physical)"
+                  )
+      )
+
+    }
+
+
+
+
+
   } else if (return == "super_cluster") {
 
     if (super_cluster_details == FALSE) {
