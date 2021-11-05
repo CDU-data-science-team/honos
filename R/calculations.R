@@ -1,28 +1,15 @@
 #' Calculate lagged HoNOS scores
 #'
-#' @param data Dataframe in wide format (i.e., one row for each HoNOS assessment
-#' and one column for each HoNOS item)
+#' @param data Dataframe in wide format (i.e., one row for each HoNOS assessment and one column for each HoNOS item)
 #' @param id_var Name of variable that uniquely identifies each individual
 #' @param date_var Name of date (or datetime) variable
-#' @param add_change_label Logical, specifying whether to add a variable that describes
-#' the change using the function \code{\link{calc_change_label}}
-#' @param change_label String, specifying whether to describe the change using
-#' "high_low" (e.g., HL stands for high to low) or "deterio_improve" (Deterioration,
-#' Unchanged, Improved)
-#' @param value_vars_current Vector, specifying variable names with values for
-#' 'current' items
-#' @param prob_var_item8 Vector, specifying variable name with description of
-#' problem (prob) for item 8
-#' @param spec_var_item8 Vector, specifying variable name with problem specification
-#' (spec) of for item 8
-#' @param value_vars_history Vector, specifying specifying variable names with
-#' values for 'historic' items
-#' @param honos_version Vector, specifying version of the HoNOS that is being used.
-#' There are 6 versions of HoNOS "Older Adults", "Children and Adolescents", "Secure",
-#' "People with Learning Disabilities", "Acquired Brain Injuries"
-#' https://www.rcpsych.ac.uk/events/in-house-training/health-of-nation-outcome-scales
-#' but this package currently only uses the "working adults". In time the other versions
-#' will be added.
+#' @param add_change_label Logical, specifying whether to add a variable that describes the change using the function \code{\link{calc_change_label}}
+#' @param change_label String, specifying whether to describe the change using "high_low" (e.g., HL stands for high to low) or "deterio_improve" (Deterioration, Unchanged, Improved)
+#' @param value_vars_current Vector, specifying variable names with values for 'current' items
+#' @param prob_var_item8 Vector, specifying variable name with description of problem (prob) for item 8
+#' @param spec_var_item8 Vector, specifying variable name with problem specification (spec) of for item 8
+#' @param value_vars_history Vector, specifying specifying variable names with values for 'historic' items
+#' @param honos_version Vector, specifying version of the HoNOS that is being used. TODO IMPLEMENT MORE VERSIONS.
 #'
 #' @return Dataframe with original data and lagged values
 #' @export
@@ -36,10 +23,7 @@
 #'           prob_var_item8 = c("q8_prob"),
 #'           spec_var_item8 = c("q8_spec"),
 #'           value_vars_history = c("qa", "qb", "qc", "qd", "qe"))
-lag_honos <- function(data, id_var, date_var, value_vars_current, prob_var_item8,
-                      spec_var_item8, value_vars_history, add_change_label = TRUE,
-                      change_label = c("high_low", "deterio_improve"),
-                      honos_version = c("working_adults")) {
+lag_honos <- function(data, id_var, date_var, value_vars_current, prob_var_item8, spec_var_item8, value_vars_history, add_change_label = TRUE, change_label = c("high_low", "deterio_improve"), honos_version = c("working_adults")) {
 
   # Check arguments
   change_label <- match.arg(change_label)
@@ -71,8 +55,7 @@ lag_honos <- function(data, id_var, date_var, value_vars_current, prob_var_item8
 
   # Calculate difference score in long format
   data_change <- data_lag %>%
-    tidyr::pivot_longer(cols = dplyr::all_of(c({{ honos_scales_new_names }},
-                                               {{ honos_scales_lag_names }})),
+    tidyr::pivot_longer(cols = dplyr::all_of(c({{ honos_scales_new_names }}, {{ honos_scales_lag_names }})),
                         values_to = "value",
                         names_to = c("lag", "item", "type"),
                         names_sep = "_") %>%
@@ -108,9 +91,7 @@ lag_honos <- function(data, id_var, date_var, value_vars_current, prob_var_item8
 #'
 #' @param value Name of variable with HoNOS score at time point (t)
 #' @param lag_value Name of variable with HoNOS score at previous time point (t-1)
-#' @param change_label String, specifying whether to describe the change using
-#' "high_low" (e.g., HL stands for high to low) or "deterio_improve" (Deterioration,
-#' Unchanged, Improved)
+#' @param change_label String, specifying whether to describe the change using "high_low" (e.g., HL stands for high to low) or "deterio_improve" (Deterioration, Unchanged, Improved)
 #'
 #' @return Labelled "factor"
 #' @export
@@ -118,8 +99,7 @@ lag_honos <- function(data, id_var, date_var, value_vars_current, prob_var_item8
 #' @examples
 #' calc_change_label(value = 0, lag_value = 4,
 #'                   change_label = "deterio_improve")
-calc_change_label <- function(value, lag_value, change_label = c("high_low",
-                                                                 "deterio_improve")) {
+calc_change_label <- function(value, lag_value, change_label = c("high_low", "deterio_improve")) {
 
   change_label <- match.arg(change_label)
 
@@ -159,10 +139,8 @@ calc_change_label <- function(value, lag_value, change_label = c("high_low",
 #' @param date_var Name of date (or datetime) variable
 #' @param item_var Name of variable specifying item numbers
 #' @param value_var Name of variable with HoNOS scores
-#' @param return_format String, specifying whether to return data in long
-#' (i.e., TODO) or wide (i.e., TODO) format
-#' @param return_items Logical, specifying whether to include individual item
-#' scores. NOTE: CURRENTLY NOT SUPPORTED.
+#' @param return_format String, specifying whether to return data in long (i.e., TODO) or wide (i.e., TODO) format
+#' @param return_items Logical, specifying whether to include individual item scores. NOTE: CURRENTLY NOT SUPPORTED.
 #'
 #' @return
 #' @export
@@ -184,13 +162,7 @@ calc_change_label <- function(value, lag_value, change_label = c("high_low",
 #'                  value_var = value,
 #'                  return_format = "long",
 #'                  return_items = TRUE)
-calc_subscales <- function(data,
-                           id_var,
-                           date_var,
-                           item_var,
-                           value_var,
-                           return_format = c("long", "wide"),
-                           return_items = FALSE) {
+calc_subscales <- function(data, id_var, date_var, item_var, value_var, return_format = c("long", "wide"), return_items = FALSE) {
 
   return_format <- match.arg(return_format)
 
