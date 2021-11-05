@@ -20,14 +20,14 @@
 #'                    id_var = id,
 #'                    value_vars_current = c("q1", "q2", "q3", "q4", "q5", "q6", "q7",
 #'                                           "q8", "q9", "q10", "q11", "q12", "q13"),
-#'                    prob_var_item8 = "q8_prob",
-#'                    spec_var_item8 = "q8_spec",
+#'                    prob_var_item8 = c("q8_prob"),
+#'                    spec_var_item8 = c("q8_spec"),
 #'                    value_vars_history = c("qa", "qb", "qc", "qd", "qe"),
 #'                    pivot = "all_items")
-pivot_honos_longer <- function(data,
-                               value_vars_current, prob_var_item8, spec_var_item8, value_vars_history,
-                               pivot = c("all_items", "item_scores"),
-                               honos_version = c("working_adults")) {
+pivot_honos_longer <- function(data, id_var, value_vars_current, prob_var_item8,
+                               spec_var_item8, value_vars_history,
+                               honos_version = c("working_adults"),
+                               pivot = c("all_items", "item_scores")) {
 
   pivot <- match.arg(pivot)
 
@@ -48,43 +48,14 @@ pivot_honos_longer <- function(data,
                                       honos_version = honos_version,
                                       .return_new_var_names = TRUE)
 
-  # pivot honos longer
+
+  # nor make data long, first need to make sure all values are same type, I dont really like this
   honos_long <- honos_renamed %>%
-    tidyr::pivot_longer(cols = dplyr::all_of(c(honos_new_var_names)),
+    dplyr::mutate_if(is.double, as.character) %>%
+    tidyr::pivot_longer(cols = dplyr::all_of(honos_new_var_names),
                         names_sep = "_",
-                        names_to = c("measure", "item", "type"))
-
-
-  if ("tbl_sql" %in% class(data)) {
-
-    honos_long <- honos_long %>%
-      dplyr::mutate(item = dplyr::case_when(item %like% "i1" ~ '1',
-                                            item %like% "i2" ~ '2',
-                                            item %like% "i3" ~ '3',
-                                            item %like% "i4" ~ '4',
-                                            item %like% "i5" ~ '5',
-                                            item %like% "i6" ~ '6',
-                                            item %like% "i7" ~ '7',
-                                            item %like% "i8" ~ '8',
-                                            item %like% "i9" ~ '9',
-                                            item %like% "i10" ~ '10',
-                                            item %like% "i11" ~ '11',
-                                            item %like% "i12" ~ '12',
-                                            item %like% "i13" ~ '13',
-                                            item %like% "i14" ~ '14',
-                                            item %like% "i15" ~ '15',
-                                            item %like% "i16" ~ '16',
-                                            item %like% "i17" ~ '17',
-                                            item %like% "i18" ~ '18'),
-                    item = as.numeric(item))
-
-  } else if ("tbl_df" %in% class(data)) {
-
-    honos_long <- honos_long %>%
-      dplyr::mutate(item = as.numeric(stringr::str_extract(item, "\\d+")))
-
-  }
-
+                        names_to = c("measure", "item", "type")) %>%
+    dplyr::mutate(item = as.numeric(stringr::str_extract(item, "\\d+")))
 
   if (pivot == "all_items") {
 

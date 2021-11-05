@@ -1,20 +1,20 @@
 Package: honos
 Title: Analyse and Visualise the Nation Outcome Scales (HoNOS)
-Version: 0.1.3
-Date: 2021-06-21
+Version: 0.1.2
+Date: 2021-02-11
 Authors@R: c(
-  person("Milan", "Wiedemann", email = "milan.wiedemann@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0003-1991-282X")),
+  person("Zoë", "Turner", role = c("aut", "cre"), email = "cdudatascience@nottshc.nhs.uk", comment = c(ORCID = "0000-0003-1033-9158")),
   person("Lori", "Edwards Suarez", role = c("aut"), comment = c(ORCID = "0000-0002-3448-4344")),
-  person("Zoe", "Turner", role = c("aut"), comment = c(ORCID = "0000-0003-1033-9158")),
   person("Ben", "di Mambro", role = c("aut"), comment = c(ORCID = "0000-0002-4886-3919")),
-  person("Chris", "Beeley", role = c("aut"), comment = c(ORCID = "0000-0003-2344-9962"))
+  person("Chris", "Beeley", role = c("aut"), comment = c(ORCID = "0000-0003-2344-9962")),
+  person("Milan", "Wiedemann", role = c("aut"), comment = c(ORCID = "0000-0003-1991-282X"))
   )
 Description: The honos R package assists with the analysis and visualisation of Health of the Nation Outcome Scales (HoNOS; Wing et al. 1998) <doi:10.1192/bjp.172.1.11>.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.1.1
 Depends: 
     R (>= 2.10)
 Imports: 
@@ -26,8 +26,6 @@ Imports:
     stringr,
     tibble
 Suggests: 
-    testthat (>= 3.0.0),
     knitr,
     rmarkdown
 VignetteBuilder: knitr
-Config/testthat/edition: 3
