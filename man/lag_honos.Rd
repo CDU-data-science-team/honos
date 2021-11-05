@@ -18,25 +18,36 @@ lag_honos(
 )
 }
 \arguments{
-\item{data}{Dataframe in wide format (i.e., one row for each HoNOS assessment and one column for each HoNOS item)}
+\item{data}{Dataframe in wide format (i.e., one row for each HoNOS assessment
+and one column for each HoNOS item)}
 
 \item{id_var}{Name of variable that uniquely identifies each individual}
 
 \item{date_var}{Name of date (or datetime) variable}
 
-\item{value_vars_current}{Vector, specifying variable names with values for 'current' items}
+\item{value_vars_current}{Vector, specifying variable names with values for
+'current' items}
 
-\item{prob_var_item8}{Vector, specifying variable name with description of problem (prob) for item 8}
+\item{prob_var_item8}{Vector, specifying variable name with description of
+problem (prob) for item 8}
 
-\item{spec_var_item8}{Vector, specifying variable name with problem specification (spec) of for item 8}
+\item{spec_var_item8}{Vector, specifying variable name with problem specification
+(spec) of for item 8}
 
-\item{value_vars_history}{Vector, specifying specifying variable names with values for 'historic' items}
+\item{value_vars_history}{Vector, specifying specifying variable names with
+values for 'historic' items}
 
-\item{add_change_label}{Logical, specifying whether to add a variable that describes the change using the function \code{\link{calc_change_label}}}
+\item{add_change_label}{Logical, specifying whether to add a variable that describes
+the change using the function \code{\link{calc_change_label}}}
 
-\item{change_label}{String, specifying whether to describe the change using "high_low" (e.g., HL stands for high to low) or "deterio_improve" (Deterioration, Unchanged, Improved)}
+\item{change_label}{String, specifying whether to describe the change using
+"high_low" (e.g., HL stands for high to low) or "deterio_improve" (Deterioration,
+Unchanged, Improved)}
 
-\item{honos_version}{Vector, specifying version of the HoNOS that is being used. TODO IMPLEMENT MORE VERSIONS.}
+\item{honos_version}{Vector, specifying version of the HoNOS that is being used.
+There are 6 versions of HoNOS https://www.rcpsych.ac.uk/events/in-house-training/health-of-nation-outcome-scales
+but this package currently only uses the "working adults". In time the other versions
+will be added.}
 }
 \value{
 Dataframe with original data and lagged values
