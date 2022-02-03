@@ -9,13 +9,16 @@ as_item_desc(x, .ignore_n_items = FALSE)
 \arguments{
 \item{x}{Vector of item numbers}
 
-\item{.ignore_n_items}{Logical, if TRUE the specified vector does not check the item number and assumes that the 18 item "working adults" version that includes current and historical scales.}
+\item{.ignore_n_items}{Logical, if TRUE the specified vector does not check
+the item number and assumes that the 18 item "working adults" version that
+includes current and historical scales.}
 }
 \value{
 Labelled "factor"
 }
 \description{
-Types of other mental and behavioural problems specified in Item 8 can be labelled using the function \code{\link{as_i8_desc}}
+Types of other mental and behavioural problems specified in
+Item 8 can be labelled using the function \code{\link{as_i8_desc}}
 }
 \examples{
 x <- 1:13

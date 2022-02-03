@@ -13,9 +13,12 @@ calc_change_label(
 \arguments{
 \item{value}{Name of variable with HoNOS score at time point (t)}
 
-\item{lag_value}{Name of variable with HoNOS score at previous time point (t-1)}
+\item{lag_value}{Name of variable with HoNOS score at previous time point
+(t-1)}
 
-\item{change_label}{String, specifying whether to describe the change using "high_low" (e.g., HL stands for high to low) or "deterio_improve" (Deterioration, Unchanged, Improved)}
+\item{change_label}{String, specifying whether to describe the change using
+"high_low" (e.g., HL stands for high to low) or "deterio_improve"
+(Deterioration, Unchanged, Improved)}
 }
 \value{
 Labelled "factor"
@@ -24,6 +27,8 @@ Labelled "factor"
 Calculate change labels for lagged change scores
 }
 \examples{
-calc_change_label(value = 0, lag_value = 4,
-                  change_label = "deterio_improve")
+calc_change_label(
+  value = 0, lag_value = 4,
+  change_label = "deterio_improve"
+)
 }

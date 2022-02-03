@@ -25,9 +25,11 @@ x <- 0:21
 as_cluster_desc(x)
 # Return super clusters (A to C)
 as_cluster_desc(x,
-                return = "super_cluster")
+  return = "super_cluster"
+)
 # Return detailed super clusters
 as_cluster_desc(x,
-                return = "super_cluster",
-                super_cluster_details = TRUE)
+  return = "super_cluster",
+  super_cluster_details = TRUE
+)
 }

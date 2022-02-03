@@ -15,17 +15,23 @@ rename_honos(
 )
 }
 \arguments{
-\item{data}{Dataset including HoNOS variables in wide format (i.e., one row per assessment, one column per item)}
+\item{data}{Dataset including HoNOS variables in wide format (i.e., one row
+per assessment, one column per item)}
 
-\item{value_vars_current}{Vector, specifying variable names with values for 'current' items}
+\item{value_vars_current}{Vector, specifying variable names with values for
+'current' items}
 
-\item{prob_var_item8}{Vector, specifying variable name with description of problem (prob) for item 8}
+\item{prob_var_item8}{Vector, specifying variable name with description of
+problem (prob) for item 8}
 
-\item{spec_var_item8}{Vector, specifying variable name with problem specification (spec) of for item 8}
+\item{spec_var_item8}{Vector, specifying variable name with problem
+specification (spec) of for item 8}
 
-\item{value_vars_history}{Vector, specifying specifying variable names with values for 'historic' items}
+\item{value_vars_history}{Vector, specifying specifying variable names with
+values for 'historic' items}
 
-\item{honos_version}{Vector, specifying version of the HoNOS that is being used. TODO IMPLEMENT MORE VERSIONS.}
+\item{honos_version}{Vector, specifying version of the HoNOS that is being
+used. TODO IMPLEMENT MORE VERSIONS.}
 }
 \value{
 
@@ -34,10 +40,14 @@ rename_honos(
 Helper function to rename HoNOS variables
 }
 \examples{
-rename_honos(data = honos::honos_data,
-             value_vars_current = c("q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8", "q9", "q10", "q11", "q12", "q13"),
-             prob_var_item8 = c("q8_prob"),
-             spec_var_item8 = c("q8_spec"),
-             value_vars_history = c("qa", "qb", "qc", "qd", "qe")
-             )
+rename_honos(
+  data = honos::honos_data,
+  value_vars_current = c(
+    "q1", "q2", "q3", "q4", "q5", "q6", "q7",
+    "q8", "q9", "q10", "q11", "q12", "q13"
+  ),
+  prob_var_item8 = c("q8_prob"),
+  spec_var_item8 = c("q8_spec"),
+  value_vars_history = c("qa", "qb", "qc", "qd", "qe")
+)
 }

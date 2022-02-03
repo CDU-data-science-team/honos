@@ -25,9 +25,11 @@ calc_subscales(
 
 \item{value_var}{Name of variable with HoNOS scores}
 
-\item{return_format}{String, specifying whether to return data in long (i.e., TODO) or wide (i.e., TODO) format}
+\item{return_format}{String, specifying whether to return data in long
+(i.e., TODO) or wide (i.e., TODO) format}
 
-\item{return_items}{Logical, specifying whether to include individual item scores. NOTE: CURRENTLY NOT SUPPORTED.}
+\item{return_items}{Logical, specifying whether to include individual
+item scores. NOTE: CURRENTLY NOT SUPPORTED.}
 }
 \value{
 
@@ -38,18 +40,24 @@ Calculate sum scores of HoNOS subscales (12-item version)
 \examples{
 # First create long data set
 honos_longish <- honos_data \%>\%
-  pivot_honos_longer(value_vars_current = c("q1", "q2", "q3", "q4", "q5", "q6", "q7",
-                                            "q8", "q9", "q10", "q11", "q12", "q13"),
-                     prob_var_item8 = c("q8_prob"),
-                     spec_var_item8 = c("q8_spec"),
-                     value_vars_history = c("qa", "qb", "qc", "qd", "qe"),
-                     pivot = "item_scores")
+  pivot_honos_longer(
+    value_vars_current = c(
+      "q1", "q2", "q3", "q4", "q5", "q6", "q7",
+      "q8", "q9", "q10", "q11", "q12", "q13"
+    ),
+    prob_var_item8 = c("q8_prob"),
+    spec_var_item8 = c("q8_spec"),
+    value_vars_history = c("qa", "qb", "qc", "qd", "qe"),
+    pivot = "item_scores"
+  )
 # Then calculate subscales based on individual item scores
 honos_longish \%>\%
-  calc_subscales(id_var = id,
-                 date_var = date,
-                 item_var = item,
-                 value_var = value,
-                 return_format = "long",
-                 return_items = TRUE)
+  calc_subscales(
+    id_var = id,
+    date_var = date,
+    item_var = item,
+    value_var = value,
+    return_format = "long",
+    return_items = TRUE
+  )
 }

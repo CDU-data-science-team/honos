@@ -5,7 +5,8 @@
 \alias{honos_data}
 \title{Example dataset dataset with repeated measures of HoNOS scores in wide format}
 \format{
-A longitudinal dataset in wide format, i.e one row per person, one column per variable.
+A longitudinal dataset in wide format, i.e one row per person,
+one column per variable.
 \itemize{
 \item{id}{: ID variable, unique identifier for each person}
 \item{date}{: Date of HoNOS assesmment}
@@ -37,8 +38,11 @@ A longitudinal dataset in wide format, i.e one row per person, one column per va
 data(honos_data)
 }
 \description{
-Example dataset with repeated measures of the Health of the Nation Outcome Scales (HoNOS) to illustrate how the package works and test functions.
-The data was created by hand, see here: \url{https://github.com/CDU-data-science-team/honos/blob/main/data-raw/DATASET.R}.
+Example dataset with repeated measures of the Health of the
+Nation Outcome Scales (HoNOS) to illustrate how the package works and test
+functions.
+The data was created by hand, see here:
+\url{https://github.com/CDU-data-science-team/honos/blob/main/data-raw/DATASET.R}.
 }
 \examples{
 # Load data into global environment

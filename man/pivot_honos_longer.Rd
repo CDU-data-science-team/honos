@@ -16,35 +16,51 @@ pivot_honos_longer(
 )
 }
 \arguments{
-\item{data}{Dataset including HoNOS variables in wide format (i.e., one row per assessment, one column per item)}
+\item{data}{Dataset including HoNOS variables in wide format (i.e., one row
+per assessment, one column per item)}
 
-\item{value_vars_current}{Vector, specifying variable names with values for 'current' items}
+\item{value_vars_current}{Vector, specifying variable names with values for
+'current' items}
 
-\item{prob_var_item8}{Vector, specifying variable name with description of problem (prob) for item 8}
+\item{prob_var_item8}{Vector, specifying variable name with description of
+problem (prob) for item 8}
 
-\item{spec_var_item8}{Vector, specifying variable name with problem specification (spec) of for item 8}
+\item{spec_var_item8}{Vector, specifying variable name with problem
+specification (spec) of for item 8}
 
-\item{value_vars_history}{Vector, specifying specifying variable names with values for 'historic' items}
+\item{value_vars_history}{Vector, specifying specifying variable names with
+values for 'historic' items}
 
-\item{honos_version}{Vector, specifying version of the HoNOS that is being used. TODO IMPLEMENT MORE VERSIONS.}
+\item{honos_version}{Vector, specifying version of the HoNOS that is being
+used. TODO IMPLEMENT MORE VERSIONS.}
 
-\item{pivot}{String, specifying whether to include item 8 problem and item 8 specification in the long format ('all_items') or whether to only include all item scores in long format ("item_scores").}
+\item{pivot}{String, specifying whether to include item 8 problem and item
+8 specification in the long format ('all_items') or whether to only include
+all item scores in long format ("item_scores").}
 }
 \value{
 
 }
 \description{
-THis functions transforms HoNOS data from wide (i.e., one row per assessment, one column per variable) to long (i.e., one row per item) data.
-This data format is needed to perform common calculations and visualisations of HoNOS data in R.
-This function automatically replaces the value 9 with a missing value ('NA').
+This functions transforms HoNOS data from wide (i.e., one row
+per assessment, one column per variable) to long (i.e., one row per item)
+data. This data format is needed to perform common calculations and
+visualisations of HoNOS data in R. This function automatically replaces the
+value 9 with a missing value ('NA').
 }
 \examples{
-pivot_honos_longer(data = honos_data,
-                   id_var = id,
-                   value_vars_current = c("q1", "q2", "q3", "q4", "q5", "q6", "q7",
-                                          "q8", "q9", "q10", "q11", "q12", "q13"),
-                   prob_var_item8 = c("q8_prob"),
-                   spec_var_item8 = c("q8_spec"),
-                   value_vars_history = c("qa", "qb", "qc", "qd", "qe"),
-                   pivot = "all_items")
+pivot_honos_longer(
+  data = honos_data,
+  id_var = id,
+  value_vars_current = c(
+    "q1", "q2", "q3",
+    "q4", "q5", "q6", "q7",
+    "q8", "q9", "q10",
+    "q11", "q12", "q13"
+  ),
+  prob_var_item8 = c("q8_prob"),
+  spec_var_item8 = c("q8_spec"),
+  value_vars_history = c("qa", "qb", "qc", "qd", "qe"),
+  pivot = "all_items"
+)
 }

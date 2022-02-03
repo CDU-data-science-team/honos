@@ -5,11 +5,15 @@ NULL
 
 #' Example dataset dataset with repeated measures of HoNOS scores in wide format
 #'
-#' @description Example dataset with repeated measures of the Health of the Nation Outcome Scales (HoNOS) to illustrate how the package works and test functions.
-#' The data was created by hand, see here: \url{https://github.com/CDU-data-science-team/honos/blob/main/data-raw/DATASET.R}.
+#' @description Example dataset with repeated measures of the Health of the
+#' Nation Outcome Scales (HoNOS) to illustrate how the package works and test
+#' functions.
+#' The data was created by hand, see here:
+#' \url{https://github.com/CDU-data-science-team/honos/blob/main/data-raw/DATASET.R}.
 #' @docType data
 #' @usage data(honos_data)
-#' @format A longitudinal dataset in wide format, i.e one row per person, one column per variable.
+#' @format A longitudinal dataset in wide format, i.e one row per person,
+#' one column per variable.
 #' \itemize{
 #'   \item{id}{: ID variable, unique identifier for each person}
 #'   \item{date}{: Date of HoNOS assesmment}
@@ -41,4 +45,3 @@ NULL
 #' # Load data into global environment
 #' data(honos_data)
 "honos_data"
-
