@@ -121,7 +121,7 @@ rename_honos <- function(data,
 
   if (.return_new_var_names == TRUE) {
 
-    honos_scales_new_names
+    return(honos_scales_new_names)
 
   } else if (.return_new_var_names == FALSE) {
 
@@ -134,7 +134,7 @@ rename_honos <- function(data,
     ) %in% honos_scales_new_names)) {
       message("The variable names specified in 'data' are already named appropriately.")
 
-      data
+      return(data)
 
     } else {
       # create object for rename function
